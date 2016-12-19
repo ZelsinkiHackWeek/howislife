@@ -1,4 +1,4 @@
-package fi.howislife.android;
+package fi.howislife.android.ui;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -6,6 +6,8 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import fi.howislife.android.R;
 
 public class MainActivity extends AppCompatActivity {
     @BindView(R.id.button_happy) TextView happy;
