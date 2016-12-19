@@ -1,4 +1,4 @@
-package android.howislife.fi.howislife;
+package fi.howislife.android;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
