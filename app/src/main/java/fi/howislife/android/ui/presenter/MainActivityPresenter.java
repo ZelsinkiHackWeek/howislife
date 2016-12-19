@@ -13,7 +13,11 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
         this.questionService = questionService;
     }
 
+    public void submitResult() {
+        //Submit stuff
+    }
+
     public interface MainActivityView extends BasePresenter.View {
-        void showSomething();
+        void openStatistics();
     }
 }
