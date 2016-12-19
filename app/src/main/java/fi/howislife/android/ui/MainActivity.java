@@ -1,7 +1,9 @@
-package fi.howislife.android;
+package fi.howislife.android.ui;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+
+import fi.howislife.android.R;
 
 public class MainActivity extends AppCompatActivity {
 
