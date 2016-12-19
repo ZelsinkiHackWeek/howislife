@@ -1,6 +1,6 @@
-package fi.howislife.android.ui.presenter;
+package fi.questionofday.android.ui.presenter;
 
-import fi.howislife.android.helper.SubscriptionHelper;
+import fi.questionofday.android.helper.SubscriptionHelper;
 
 public abstract class BasePresenter<T extends BasePresenter.View> {
 

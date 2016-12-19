@@ -1,4 +1,4 @@
-package fi.howislife.android.helper;
+package fi.questionofday.android.helper;
 
 import android.support.annotation.NonNull;
 

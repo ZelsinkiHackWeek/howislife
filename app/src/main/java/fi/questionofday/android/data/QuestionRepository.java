@@ -1,4 +1,4 @@
-package fi.howislife.android.data;
+package fi.questionofday.android.data;
 
 import java.util.List;
 

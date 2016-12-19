@@ -1,7 +1,7 @@
-package fi.howislife.android.ui.presenter;
+package fi.questionofday.android.ui.presenter;
 
-import fi.howislife.android.domain.QuestionService;
-import fi.howislife.android.helper.SubscriptionHelper;
+import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.helper.SubscriptionHelper;
 
 public class StatisticsActivityPresenter extends
         BasePresenter<StatisticsActivityPresenter.StatisticsActivityView> {

@@ -1,8 +1,8 @@
-package fi.howislife.android.domain;
+package fi.questionofday.android.domain;
 
 import java.util.List;
 
-import fi.howislife.android.data.QuestionRepository;
+import fi.questionofday.android.data.QuestionRepository;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 import io.reactivex.android.schedulers.AndroidSchedulers;

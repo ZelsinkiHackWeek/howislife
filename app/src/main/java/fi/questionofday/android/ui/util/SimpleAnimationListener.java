@@ -1,4 +1,4 @@
-package fi.howislife.android.ui.util;
+package fi.questionofday.android.ui.util;
 
 import android.view.animation.Animation;
 

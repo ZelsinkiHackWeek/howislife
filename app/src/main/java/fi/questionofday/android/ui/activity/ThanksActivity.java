@@ -1,14 +1,14 @@
-package fi.howislife.android.ui.activity;
+package fi.questionofday.android.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
-import fi.howislife.android.R;
-import fi.howislife.android.data.QuestionRepository;
-import fi.howislife.android.domain.QuestionService;
-import fi.howislife.android.helper.SubscriptionHelper;
-import fi.howislife.android.ui.presenter.ThanksActivityPresenter;
+import fi.questionofday.android.R;
+import fi.questionofday.android.data.QuestionRepository;
+import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.helper.SubscriptionHelper;
+import fi.questionofday.android.ui.presenter.ThanksActivityPresenter;
 
 public class ThanksActivity extends BaseActivity implements
         ThanksActivityPresenter.ThanksActivityView {

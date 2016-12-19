@@ -1,4 +1,4 @@
-package fi.howislife.android.ui.activity;
+package fi.questionofday.android.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
@@ -6,12 +6,12 @@ import android.widget.TextView;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import fi.howislife.android.R;
-import fi.howislife.android.data.QuestionRepository;
-import fi.howislife.android.domain.QuestionService;
-import fi.howislife.android.helper.SubscriptionHelper;
-import fi.howislife.android.ui.presenter.MainActivityPresenter;
-import fi.howislife.android.ui.util.AnimationUtils;
+import fi.questionofday.android.R;
+import fi.questionofday.android.data.QuestionRepository;
+import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.helper.SubscriptionHelper;
+import fi.questionofday.android.ui.presenter.MainActivityPresenter;
+import fi.questionofday.android.ui.util.AnimationUtils;
 
 public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
 

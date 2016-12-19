@@ -1,4 +1,4 @@
-package fi.howislife.android.ui.domain.entity;
+package fi.questionofday.android.ui.domain.entity;
 
 /**
  * Created by plappalainen on 19/12/2016.
