@@ -3,6 +3,9 @@ package fi.howislife.android.ui.activity;
 import android.os.Bundle;
 
 import fi.howislife.android.R;
+import fi.howislife.android.data.QuestionRepository;
+import fi.howislife.android.domain.QuestionService;
+import fi.howislife.android.helper.SubscriptionHelper;
 import fi.howislife.android.ui.presenter.BasePresenter;
 import fi.howislife.android.ui.presenter.MainActivityPresenter;
 
@@ -11,7 +14,10 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @Override
     public BasePresenter getPresenter() {
         // Add here all dependencies to the presenter
-        return new MainActivityPresenter();
+        return new MainActivityPresenter(new SubscriptionHelper(),
+                new QuestionService(
+                        QuestionRepository.getInstance()
+                ));
     }
 
     @Override
