@@ -1,14 +1,11 @@
 package fi.howislife.android.ui.presenter;
 
-import javax.inject.Inject;
+public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.MainActivityView> {
 
-/**
- * Created by jduran on 19/12/16.
- */
-public class MainActivityPresenter {
-
-    @Inject
     public MainActivityPresenter() {
+    }
 
+    public interface MainActivityView extends BasePresenter.View {
+        void showSomething();
     }
 }
