@@ -10,6 +10,7 @@ import fi.questionofday.android.R;
 import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
 import fi.questionofday.android.helper.SubscriptionHelper;
+import fi.questionofday.android.ui.domain.entity.Question;
 import fi.questionofday.android.ui.presenter.MainActivityPresenter;
 import fi.questionofday.android.ui.util.AnimationUtils;
 
@@ -17,10 +18,13 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     private MainActivityPresenter presenter;
 
+    @BindView(R.id.a_main_question_of_the_day) TextView textQuestion;
     @BindView(R.id.a_main_button_super_happy) TextView buttonSuperHappy;
     @BindView(R.id.a_main_button_happy) TextView buttonHappy;
     @BindView(R.id.a_main_button_meh) TextView buttonMeh;
     @BindView(R.id.a_main_button_sad) TextView buttonSad;
+
+    private Question question;
 
     @Override
     public MainActivityPresenter getPresenter() {
@@ -55,6 +59,12 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @Override
     public void openStatistics() {
         StatisticsActivity.launch(this);
+    }
+
+    @Override
+    public void showQuestion(Question question) {
+        this.question = question;
+        textQuestion.setText(question.getText());
     }
 
     @OnClick({R.id.a_main_button_statistics})
