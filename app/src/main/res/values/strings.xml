@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">How Is Life?</string>
+    <string name="how_is_life">How Is Life?</string>
+    <string name="statistics">Statistics</string>
 </resources>
