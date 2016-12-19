@@ -10,6 +10,6 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
     }
 
     public interface MainActivityView extends BasePresenter.View {
-        void showSomething();
+        void openStatistics();
     }
 }

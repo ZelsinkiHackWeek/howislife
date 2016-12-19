@@ -7,6 +7,9 @@ import android.view.animation.Animation;
  */
 public abstract class SimpleAnimationListener implements Animation.AnimationListener {
 
+    int id;
+    String text;
+
     @Override
     public void onAnimationStart(Animation animation) {
     }
