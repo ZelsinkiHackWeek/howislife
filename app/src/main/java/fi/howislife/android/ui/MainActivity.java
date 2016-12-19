@@ -6,7 +6,6 @@ import android.widget.TextView;
 import com.karumi.rosie.view.RosieActivity;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import fi.howislife.android.R;
 
 public class MainActivity extends RosieActivity {
