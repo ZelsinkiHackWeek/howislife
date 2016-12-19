@@ -1,4 +1,4 @@
-package android.howislife.fi.howislife;
+package fi.howislife.android;
 
 import com.karumi.rosie.application.RosieApplication;
 
