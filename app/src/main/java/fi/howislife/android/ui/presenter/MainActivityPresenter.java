@@ -5,6 +5,10 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
     public MainActivityPresenter() {
     }
 
+    public void submitResult() {
+        //Submit stuff
+    }
+
     public interface MainActivityView extends BasePresenter.View {
         void showSomething();
     }

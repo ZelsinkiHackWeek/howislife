@@ -27,7 +27,7 @@
                 android:id="@+id/button_happy"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_large"
+                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 tools:text=":)"/>
 
@@ -35,7 +35,7 @@
                 android:id="@+id/button_sad"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_large"
+                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 tools:text=":("/>
     </LinearLayout>

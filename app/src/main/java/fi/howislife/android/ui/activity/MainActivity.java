@@ -1,12 +1,15 @@
 package fi.howislife.android.ui.activity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.TextView;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import fi.howislife.android.R;
 import fi.howislife.android.ui.presenter.BasePresenter;
 import fi.howislife.android.ui.presenter.MainActivityPresenter;
+import fi.howislife.android.ui.util.AnimationUtils;
 
 public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
 
@@ -37,5 +40,10 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     @Override
     public void showSomething() {
+    }
+
+    @OnClick({R.id.button_happy, R.id.button_sad})
+    public void onEmoticonClick(View view) {
+        AnimationUtils.clickAnimation(view);
     }
 }
