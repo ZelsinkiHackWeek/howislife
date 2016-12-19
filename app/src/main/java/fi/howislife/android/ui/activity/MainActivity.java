@@ -37,6 +37,5 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     @Override
     public void showSomething() {
-
     }
 }
