@@ -10,11 +10,12 @@ import fi.howislife.android.R;
 import fi.howislife.android.data.QuestionRepository;
 import fi.howislife.android.domain.QuestionService;
 import fi.howislife.android.helper.SubscriptionHelper;
-import fi.howislife.android.ui.presenter.BasePresenter;
 import fi.howislife.android.ui.presenter.MainActivityPresenter;
 import fi.howislife.android.ui.util.AnimationUtils;
 
 public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
+
+    private MainActivityPresenter presenter;
 
     @BindView(R.id.a_main_button_super_happy) TextView buttonSuperHappy;
     @BindView(R.id.a_main_button_happy) TextView buttonHappy;
@@ -22,12 +23,15 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @BindView(R.id.a_main_button_sad) TextView buttonSad;
 
     @Override
-    public BasePresenter getPresenter() {
+    public MainActivityPresenter getPresenter() {
         // Add here all dependencies to the presenter
-        return new MainActivityPresenter(new SubscriptionHelper(),
-                new QuestionService(
-                        QuestionRepository.getInstance()
-                ));
+        if (presenter == null) {
+            presenter = new MainActivityPresenter(new SubscriptionHelper(),
+                    new QuestionService(
+                            QuestionRepository.getInstance()
+                    ));
+        }
+        return presenter;
     }
 
     @Override
@@ -50,6 +54,12 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     @Override
     public void openStatistics() {
+        StatisticsActivity.launch(this);
+    }
+
+    @OnClick({R.id.a_main_button_statistics})
+    public void onStatisticsClick(View view) {
+        openStatistics();
     }
 
     @OnClick({R.id.a_main_button_super_happy,
@@ -57,6 +67,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_meh,
             R.id.a_main_button_sad})
     public void onEmoticonClick(View view) {
-        AnimationUtils.clickAnimation(view);
+        AnimationUtils.clickAnimation(view, () -> getPresenter().submitResult());
+        ThanksActivity.launch(this);
     }
 }
