@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "610276952899",
+    "firebase_url": "https://question-of-the-day-96172.firebaseio.com",
+    "project_id": "question-of-the-day-96172",
+    "storage_bucket": "question-of-the-day-96172.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:610276952899:android:a0286808c89be169",
+        "android_client_info": {
+          "package_name": "fi.questionofday.android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "610276952899-c2o151bij4gcoeveiscl6uvde96dba9j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "fi.questionofday.android",
+            "certificate_hash": "E4125117489C8A27B22C9B93C888FC9E30B4F031"
+          }
+        },
+        {
+          "client_id": "610276952899-ra6fljms8hpmoc2dg2q6f9u1epdcojhp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyClFehY-yqveyuJDbM4oo8t5k9SDpFXTPQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "610276952899-ra6fljms8hpmoc2dg2q6f9u1epdcojhp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
