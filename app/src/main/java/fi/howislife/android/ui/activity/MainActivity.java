@@ -2,25 +2,16 @@ package fi.howislife.android.ui.activity;
 
 import android.os.Bundle;
 
-import com.karumi.rosie.view.Presenter;
-import com.karumi.rosie.view.RosieActivity;
-
-import java.util.Arrays;
-import java.util.List;
-
-import javax.inject.Inject;
-
 import fi.howislife.android.R;
-import fi.howislife.android.module.MainModule;
+import fi.howislife.android.ui.presenter.BasePresenter;
 import fi.howislife.android.ui.presenter.MainActivityPresenter;
 
-public class MainActivity extends RosieActivity {
-
-    @Inject @Presenter MainActivityPresenter mainActivityPresenter;
+public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
 
     @Override
-    protected List<Object> getActivityScopeModules() {
-        return Arrays.asList((Object) new MainModule());
+    public BasePresenter getPresenter() {
+        // Add here all dependencies to the presenter
+        return new MainActivityPresenter();
     }
 
     @Override
@@ -31,5 +22,10 @@ public class MainActivity extends RosieActivity {
     @Override
     protected int getLayoutId() {
         return R.layout.activity_main;
+    }
+
+    @Override
+    public void showSomething() {
+
     }
 }
