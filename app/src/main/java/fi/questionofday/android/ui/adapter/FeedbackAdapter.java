@@ -26,6 +26,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
         this.presenter = presenter;
     }
 
+    public void setItems(List<Feedback> items) {
+        feedbackList.clear();
+        feedbackList.addAll(items);
+        notifyDataSetChanged();
+    }
+
     @Override
     public FeedbackAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {

@@ -2,15 +2,22 @@ package fi.questionofday.android.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.Description;
+import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.formatter.DefaultValueFormatter;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -29,6 +36,7 @@ public class StatisticsActivity extends BaseActivity implements
     @BindView(R.id.a_statistics_recyclerview) RecyclerView recyclerView;
 
     private StatisticsActivityPresenter presenter;
+    private FeedbackAdapter feedbackAdapter;
 
     public static void launch(Activity launchingActivity) {
         Intent intent = new Intent(launchingActivity, StatisticsActivity.class);
@@ -62,22 +70,69 @@ public class StatisticsActivity extends BaseActivity implements
         recyclerView.setLayoutManager(
                 new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
     public void showError() {
-        Toast.makeText(this, "All the errors in the world happened all at once",
+        Toast.makeText(this, R.string.error_general,
                 Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void showFeedback(List<Feedback> feedbackList) {
-        recyclerView.setAdapter(new FeedbackAdapter(feedbackList, presenter));
+        if (feedbackAdapter == null) {
+            feedbackAdapter = new FeedbackAdapter(new ArrayList<>(), presenter);
+            recyclerView.setAdapter(feedbackAdapter);
+        }
+        feedbackAdapter.setItems(feedbackList);
     }
 
     @Override
     public void showFeedback(Feedback feedbackToShow) {
-        // TODO render pie chart
-        Log.i("eee", feedbackToShow.toString());
+        final List<PieEntry> entries = new ArrayList<>();
+        final List<Integer> colors = new ArrayList<>();
+        if (feedbackToShow.getStar4() > 0) {
+            entries.add(new PieEntry(feedbackToShow.getStar4(), "Super happy"));
+            colors.add(Color.rgb(0, 181, 60));
+        }
+        if (feedbackToShow.getStar3() > 0) {
+            entries.add(new PieEntry(feedbackToShow.getStar3(), "Happy"));
+            colors.add(Color.rgb(0, 217, 137));
+        }
+        if (feedbackToShow.getStar2() > 0) {
+            entries.add(new PieEntry(feedbackToShow.getStar2(), "Meh"));
+            colors.add(Color.rgb(0, 217, 212));
+        }
+        if (feedbackToShow.getStar1() > 0) {
+            entries.add(new PieEntry(feedbackToShow.getStar1(), "Sad"));
+            colors.add(Color.rgb(56, 135, 214));
+        }
+        final PieDataSet pieDataSet = new PieDataSet(entries, null);
+        pieDataSet.setValueTextSize(20f);
+        pieDataSet.setColors(colors);
+        final PieData pieData = new PieData(pieDataSet);
+        pieData.setValueFormatter(new DefaultValueFormatter(0));
+        pieData.setValueTextSize(16f);
+        pieChart.setData(pieData);
+        final Description description = new Description();
+        description.setTextSize(16f);
+        description.setText("Total votes: " + feedbackToShow.getTotal());
+        pieChart.setDescription(description);
+        pieChart.setCenterText(feedbackToShow.getQuestion().getText());
+        pieChart.setCenterTextSize(16f);
+        pieChart.setCenterTextRadiusPercent(90f);
+        pieChart.setEntryLabelTextSize(16f);
+        final Legend l = pieChart.getLegend();
+        l.setTextSize(16f);
+        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
+        l.setOrientation(Legend.LegendOrientation.VERTICAL);
+        l.setDrawInside(false);
+        l.setXEntrySpace(7f);
+        l.setYEntrySpace(0f);
+        l.setYOffset(0f);
+        l.setXOffset(-60f);
+        pieChart.invalidate();
     }
 }

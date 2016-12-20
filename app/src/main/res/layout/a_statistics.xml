@@ -29,14 +29,16 @@
             app:layout_widthPercent="80%"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/activity_horizontal_margin"
+            android:paddingStart="@dimen/activity_horizontal_margin"
             android:layout_alignParentEnd="true">
 
         <com.github.mikephil.charting.charts.PieChart
-                app:layout_widthPercent="80%"
                 android:id="@+id/a_statistics_pie_chart"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"/>
 
     </FrameLayout>
