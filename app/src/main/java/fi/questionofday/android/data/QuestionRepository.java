@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import fi.questionofday.android.data.entity.QuestionData;
+import fi.questionofday.android.domain.entity.Question;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
@@ -72,7 +73,7 @@ public class QuestionRepository {
         return Observable.never();
     }
 
-    public Observable<Object> loadFeedbackForQuestion(int questionId) {
+    public Observable<Question> loadFeedbackForQuestion(int questionId) {
         return Observable.never();
     }
 }
