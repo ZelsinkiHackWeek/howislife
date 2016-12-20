@@ -2,6 +2,7 @@ package fi.questionofday.android.data;
 
 import java.util.List;
 
+import fi.questionofday.android.domain.entity.Question;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
 
@@ -16,7 +17,7 @@ public class QuestionRepository {
     private QuestionRepository() {
     }
 
-    public Observable<Object> loadCurrentQuestion() {
+    public Observable<Question> loadCurrentQuestion() {
         return Observable.never();
     }
 
@@ -28,7 +29,7 @@ public class QuestionRepository {
         return Observable.never();
     }
 
-    public Observable<Object> loadFeedbackForQuestion(int questionId) {
+    public Observable<Question> loadFeedbackForQuestion(int questionId) {
         return Observable.never();
     }
 }
