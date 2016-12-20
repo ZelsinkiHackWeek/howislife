@@ -17,6 +17,7 @@ public abstract class BaseActivity extends FragmentActivity implements BasePrese
         int layoutId = getLayoutId();
         setContentView(layoutId);
         ButterKnife.bind(this);
+        //noinspection unchecked
         getPresenter().setView(this);
         getPresenter().initialize();
     }
