@@ -13,9 +13,10 @@ public class QuestionData {
         // Default constructor required for calls to DataSnapshot.getValue(QuestionData.class)
     }
 
-    public QuestionData(String id, String text) {
+    public QuestionData(String id, String text, Long creationDate) {
         this.id = id;
         this.text = text;
+        this.creationDate = creationDate;
     }
 
 }

@@ -21,35 +21,13 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
         subscriptionHelper.addSubscription(questionService.loadCurrentQuestion().subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
-                getView().showQuestion(null);
+                getView().showQuestion((Question) o);
             }
-        }, new Consumer<Throwable>() {
-            @Override
-            public void accept(Throwable throwable) throws Exception {
-                getView().showError();
-            }
-        }));
+        }, throwable -> getView().showError()));
     }
 
     public void submitResult() {
         questionService.submitFeedback(null, null);
-    }
-
-    public void createQuestion(String s) {
-
-        subscriptionHelper.addSubscription(
-                questionService.submitQuestion(s).subscribe(new Action() {
-                    @Override
-                    public void run() throws Exception {
-                        System.out.println("a");
-                    }
-                }, new Consumer<Throwable>() {
-                    @Override
-                    public void accept(Throwable throwable) throws Exception {
-                        System.out.println("error");
-                    }
-                })
-        );
     }
 
     public interface MainActivityView extends BasePresenter.View {

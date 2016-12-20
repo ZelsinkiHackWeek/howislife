@@ -60,11 +60,11 @@ public class QuestionRepository {
             });
 
             questionsTable.orderByChild("creationDate")
-                    .limitToFirst(1)
+                    .limitToLast(1)
                     .addValueEventListener(valueListener);
         }).map(object -> {
             QuestionData questionData = (QuestionData) object;
-            return new Question(1, "a");
+            return new Question(questionData.id, questionData.text);
         });
     }
 
@@ -72,7 +72,7 @@ public class QuestionRepository {
 
         return Completable.fromAction(() -> {
             QuestionData newQuestionData = new QuestionData(String.valueOf(System
-                    .currentTimeMillis()), textOfQuestion);
+                    .currentTimeMillis()), textOfQuestion, System.currentTimeMillis());
             questionsTable.child(newQuestionData.id).setValue(newQuestionData);
         });
     }
