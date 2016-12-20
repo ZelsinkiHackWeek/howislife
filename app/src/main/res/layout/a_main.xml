@@ -25,6 +25,7 @@
 
         <TextView
                 android:id="@+id/a_main_button_super_happy"
+                android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
@@ -33,6 +34,7 @@
 
         <TextView
                 android:id="@+id/a_main_button_happy"
+                android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
@@ -41,6 +43,7 @@
 
         <TextView
                 android:id="@+id/a_main_button_meh"
+                android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
@@ -49,6 +52,7 @@
 
         <TextView
                 android:id="@+id/a_main_button_sad"
+                android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"

@@ -3,6 +3,7 @@ package fi.questionofday.android.ui.activity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -67,6 +68,12 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         textQuestion.setText(question.getText());
     }
 
+    @Override
+    public void showError() {
+        Toast.makeText(this, "All the errors in the world happened all at once",
+                Toast.LENGTH_SHORT).show();
+    }
+
     @OnClick({R.id.a_main_button_statistics})
     public void onStatisticsClick(View view) {
         openStatistics();
@@ -76,8 +83,10 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_happy,
             R.id.a_main_button_meh,
             R.id.a_main_button_sad})
-    public void onEmoticonClick(View view) {
-        AnimationUtils.clickAnimation(view, () -> getPresenter().submitResult());
-        ThanksActivity.launch(this);
+    public void onEmoticonClick(TextView view) {
+        AnimationUtils.clickAnimation(view, () -> {
+            getPresenter().submitResult();
+            ThanksActivity.launch(this, view);
+        });
     }
 }
