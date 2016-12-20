@@ -23,41 +23,49 @@
             android:layout_height="wrap_content"
             android:layout_centerInParent="true">
 
-        <TextView
+        <ImageView
                 android:id="@+id/a_main_button_super_happy"
                 android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
-                tools:text=":D"/>
+                android:src="@drawable/emoji_super_happy"
+                android:scaleX="0"
+                android:scaleY="0"/>
 
-        <TextView
+        <ImageView
                 android:id="@+id/a_main_button_happy"
                 android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
-                tools:text=":)"/>
+                android:src="@drawable/emoji_happy"
+                android:scaleX="0"
+                android:scaleY="0"/>
 
-        <TextView
+        <ImageView
                 android:id="@+id/a_main_button_meh"
                 android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
-                tools:text=":|"/>
+                android:src="@drawable/emoji_meh"
+                android:scaleX="0"
+                android:scaleY="0"/>
 
-        <TextView
+        <ImageView
                 android:id="@+id/a_main_button_sad"
                 android:transitionName="a_thanks_selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
-                tools:text=":("/>
+                android:src="@drawable/emoji_sad"
+                android:scaleX="0"
+                android:scaleY="0"/>
     </LinearLayout>
 
     <Button
