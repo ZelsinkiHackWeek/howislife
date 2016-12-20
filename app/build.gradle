@@ -36,6 +36,7 @@ dependencies {
     compile 'com.google.firebase:firebase-database:10.0.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
 }
 
 apply plugin: 'com.google.gms.google-services'

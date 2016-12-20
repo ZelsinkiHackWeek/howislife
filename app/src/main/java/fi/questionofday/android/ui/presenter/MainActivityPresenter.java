@@ -3,7 +3,6 @@ package fi.questionofday.android.ui.presenter;
 import fi.questionofday.android.domain.QuestionService;
 import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.MainActivityView> {
@@ -18,12 +17,17 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
 
     @Override
     public void initialize() {
-        subscriptionHelper.addSubscription(questionService.loadCurrentQuestion().subscribe(new Consumer<Object>() {
+        subscriptionHelper.addSubscription(questionService.loadCurrentQuestion()
+                .subscribe(new Consumer<Object>() {
             @Override
             public void accept(Object o) throws Exception {
                 getView().showQuestion((Question) o);
             }
         }, throwable -> getView().showError()));
+    }
+
+    public void submitQuestion(String question) {
+        questionService.submitQuestion(question).subscribe();
     }
 
     public void submitResult() {
