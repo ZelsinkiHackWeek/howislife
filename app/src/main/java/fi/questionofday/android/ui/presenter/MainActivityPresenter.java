@@ -30,8 +30,8 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
         questionService.submitQuestion(question).subscribe();
     }
 
-    public void submitResult() {
-        questionService.submitFeedback(null, 0);
+    public void submitResult(Question question, int feedback) {
+        questionService.submitFeedback(question, feedback);
     }
 
     public interface MainActivityView extends BasePresenter.View {

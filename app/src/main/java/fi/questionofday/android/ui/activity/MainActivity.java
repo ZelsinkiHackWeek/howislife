@@ -90,8 +90,8 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         view.animate()
                 .scaleY(1f)
                 .scaleX(1f)
-                .setDuration(random.nextInt(100)+minDuration)
-                .setStartDelay(random.nextInt(100)+minDelay)
+                .setDuration(random.nextInt(100) + minDuration)
+                .setStartDelay(random.nextInt(100) + minDelay)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .start();
     }
@@ -122,7 +122,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     public void onChangeQuestionClick(View view) {
 
         @SuppressLint("InflateParams")
-        final FrameLayout layout = (FrameLayout)LayoutInflater.from(this)
+        final FrameLayout layout = (FrameLayout) LayoutInflater.from(this)
                 .inflate(R.layout.d_question, null);
         final EditText edit = ButterKnife.findById(layout, R.id.d_question_edit);
         new AlertDialog.Builder(this)
@@ -141,7 +141,23 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_sad})
     public void onEmoticonClick(ImageView view) {
         AnimationUtils.clickAnimation(view, () -> {
-            getPresenter().submitResult();
+            final int feedback;
+            switch (view.getId()) {
+                case R.id.a_main_button_sad:
+                    feedback = 0;
+                    break;
+                case R.id.a_main_button_meh:
+                    feedback = 1;
+                    break;
+                case R.id.a_main_button_happy:
+                    feedback = 2;
+                    break;
+                case R.id.a_main_button_super_happy:
+                default:
+                    feedback = 3;
+                    break;
+            }
+            getPresenter().submitResult(question, feedback);
             ThanksActivity.launch(this, view);
         });
     }
