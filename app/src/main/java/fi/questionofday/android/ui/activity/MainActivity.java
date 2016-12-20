@@ -117,12 +117,16 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         switch (feedback) {
             case ONE:
                 ThanksActivity.launch(this, zalandoLogo, buttonSad);
+                break;
             case TWO:
                 ThanksActivity.launch(this, zalandoLogo, buttonMeh);
+                break;
             case THREE:
                 ThanksActivity.launch(this, zalandoLogo, buttonHappy);
+                break;
             case FOUR:
                 ThanksActivity.launch(this, zalandoLogo, buttonSuperHappy);
+                break;
         }
     }
 

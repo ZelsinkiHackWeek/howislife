@@ -19,7 +19,6 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
 
     @Override
     public void initialize() {
-
         subscriptionHelper.addSubscription(questionService.loadCurrentQuestion()
                 .subscribe(questionOptional -> {
                     if (questionOptional.isPresent()) {
