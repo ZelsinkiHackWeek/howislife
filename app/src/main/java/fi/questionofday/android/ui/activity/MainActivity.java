@@ -10,8 +10,8 @@ import butterknife.OnClick;
 import fi.questionofday.android.R;
 import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
-import fi.questionofday.android.ui.domain.entity.Question;
 import fi.questionofday.android.ui.presenter.MainActivityPresenter;
 import fi.questionofday.android.ui.util.AnimationUtils;
 

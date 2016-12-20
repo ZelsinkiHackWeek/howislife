@@ -1,8 +1,8 @@
 package fi.questionofday.android.ui.presenter;
 
 import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
-import fi.questionofday.android.ui.domain.entity.Question;
 import io.reactivex.functions.Consumer;
 
 public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.MainActivityView> {
