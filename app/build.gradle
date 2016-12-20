@@ -37,6 +37,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.4.0'
     testCompile 'junit:junit:4.12'
     compile 'com.github.PhilJay:MPAndroidChart:v3.0.1'
+    compile 'com.android.support:percent:25.1.0'
 }
 
 apply plugin: 'com.google.gms.google-services'

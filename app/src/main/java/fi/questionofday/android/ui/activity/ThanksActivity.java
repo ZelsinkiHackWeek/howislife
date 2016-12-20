@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityOptionsCompat;
+import android.support.v4.util.Pair;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
@@ -24,15 +25,18 @@ public class ThanksActivity extends BaseActivity implements
     private static final String ARG_EMOTICON = "emoticon";
 
     @BindView(R.id.a_thanks_selected) ImageView imageSelected;
+    @BindView(R.id.a_thanks_zalando_logo) ImageView zalandoLogo;
 
     private ThanksActivityPresenter presenter;
     private Integer emoticon;
 
-    public static void launch(Activity launchingActivity, @Nullable ImageView v) {
+    public static void launch(Activity launchingActivity, ImageView logo, @Nullable ImageView v) {
         Intent intent = new Intent(launchingActivity, ThanksActivity.class);
         ActivityOptionsCompat options = ActivityOptionsCompat.
-                makeSceneTransitionAnimation(launchingActivity, v, "a_thanks_selected");
-        intent.putExtra(ARG_EMOTICON, (Integer) v.getTag());
+                makeSceneTransitionAnimation(launchingActivity,
+                        new Pair<>(v, "selected"),
+                        new Pair<>(logo, "logo"));
+        intent.putExtra(ARG_EMOTICON, (Integer)v.getTag());
         launchingActivity.startActivity(intent, options.toBundle());
     }
 
@@ -51,7 +55,8 @@ public class ThanksActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             emoticon = savedInstanceState.getInt(ARG_EMOTICON);
-        } else {
+        }
+        else {
             emoticon = getIntent().getIntExtra(ARG_EMOTICON, 0);
         }
         initView();

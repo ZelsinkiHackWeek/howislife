@@ -38,6 +38,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @BindView(R.id.a_main_button_happy) ImageView buttonHappy;
     @BindView(R.id.a_main_button_meh) ImageView buttonMeh;
     @BindView(R.id.a_main_button_sad) ImageView buttonSad;
+    @BindView(R.id.a_main_zalando_logo) ImageView zalandoLogo;
 
     private Question question;
 
@@ -86,6 +87,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             animateView(buttonHappy);
             animateView(buttonMeh);
             animateView(buttonSad);
+            zalandoLogo.animate().alpha(0.2f).start();
         });
     }
 
@@ -93,6 +95,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         //Reset values:
         view.setScaleX(0);
         view.setScaleY(0);
+        view.setAlpha(1f);
         //Animate:
         view.animate()
                 .scaleY(1f)
@@ -113,13 +116,13 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
         switch (feedback) {
             case ONE:
-                ThanksActivity.launch(this, buttonSad);
+                ThanksActivity.launch(this, zalandoLogo, buttonSad);
             case TWO:
-                ThanksActivity.launch(this, buttonMeh);
+                ThanksActivity.launch(this, zalandoLogo, buttonMeh);
             case THREE:
-                ThanksActivity.launch(this, buttonHappy);
+                ThanksActivity.launch(this, zalandoLogo, buttonHappy);
             case FOUR:
-                ThanksActivity.launch(this, buttonSuperHappy);
+                ThanksActivity.launch(this, zalandoLogo, buttonSuperHappy);
         }
     }
 
