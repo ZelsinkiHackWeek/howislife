@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -8,6 +9,19 @@
         android:paddingRight="@dimen/activity_horizontal_margin"
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
+
+    <ImageView
+            android:id="@+id/a_main_zalando_logo"
+            android:transitionName="logo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_widthPercent="80%"
+            android:adjustViewBounds="true"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginBottom="100dp"
+            android:src="@drawable/zalando_logo"
+            android:alpha="0"/>
 
     <TextView
             android:id="@+id/a_main_question_of_the_day"
@@ -23,10 +37,9 @@
 
         <ImageView
                 android:id="@+id/a_main_button_super_happy"
-                android:transitionName="a_thanks_selected"
+                android:transitionName="selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_super_happy"
                 android:scaleX="0"
@@ -34,10 +47,9 @@
 
         <ImageView
                 android:id="@+id/a_main_button_happy"
-                android:transitionName="a_thanks_selected"
+                android:transitionName="selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_happy"
                 android:scaleX="0"
@@ -45,10 +57,9 @@
 
         <ImageView
                 android:id="@+id/a_main_button_meh"
-                android:transitionName="a_thanks_selected"
+                android:transitionName="selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_meh"
                 android:scaleX="0"
@@ -56,10 +67,9 @@
 
         <ImageView
                 android:id="@+id/a_main_button_sad"
-                android:transitionName="a_thanks_selected"
+                android:transitionName="selected"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="@dimen/text_massive"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_sad"
                 android:scaleX="0"
@@ -86,4 +96,4 @@
                 android:text="@string/change_question"
                 android:layout_margin="@dimen/margin_small"/>
     </LinearLayout>
-</RelativeLayout>
+</android.support.percent.PercentRelativeLayout>
