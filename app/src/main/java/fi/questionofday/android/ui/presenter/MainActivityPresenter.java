@@ -41,7 +41,12 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
     }
 
     public void submitQuestion(String question) {
-        questionService.submitQuestion(question).subscribe();
+        questionService.submitQuestion(question).subscribe(
+                () -> getView().onQuestionSubmittedSuccessfully(),
+                throwable -> {
+                    getView().showError();
+                    Log.e(getClass().getSimpleName(), "error", throwable);
+                });
     }
 
     public interface MainActivityView extends BasePresenter.View {
@@ -50,6 +55,8 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
         void sayThanks(Feedback.FEEDBACK givenFeedback);
 
         void showQuestion(Question question);
+
+        void onQuestionSubmittedSuccessfully();
 
         void showError();
     }

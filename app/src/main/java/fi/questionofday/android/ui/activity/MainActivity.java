@@ -3,12 +3,14 @@ package fi.questionofday.android.ui.activity;
 import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,6 +30,7 @@ import fi.questionofday.android.ui.util.AnimationUtils;
 
 public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
 
+    private static final String SUPER_SECRET_PASSWORD = "gravity4ever";
     private MainActivityPresenter presenter;
     final Random random = new Random();
     final int minDelay = 150;
@@ -146,8 +149,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     @Override
     public void showError() {
-        Toast.makeText(this, "All the errors in the world happened all at once",
-                Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, R.string.error_general, Toast.LENGTH_SHORT).show();
     }
 
     @OnClick({R.id.a_main_button_statistics})
@@ -159,17 +161,49 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     public void onChangeQuestionClick(View view) {
 
         @SuppressLint("InflateParams")
-        final FrameLayout layout = (FrameLayout) LayoutInflater.from(this)
+        final LinearLayout layout = (LinearLayout) LayoutInflater.from(this)
                 .inflate(R.layout.d_question, null);
+        final EditText pass = ButterKnife.findById(layout, R.id.d_question_password);
         final EditText edit = ButterKnife.findById(layout, R.id.d_question_edit);
-        new AlertDialog.Builder(this)
+        final AlertDialog dialog = new AlertDialog.Builder(this)
                 .setTitle(R.string.enter_the_question)
                 .setView(layout)
-                .setPositiveButton(android.R.string.ok, (dialog, which) ->
-                        getPresenter().submitQuestion(edit.getText().toString().trim()))
+                .setPositiveButton(android.R.string.ok, null) //Assigned later
                 .setNegativeButton(android.R.string.cancel, null)
-                .create()
-                .show();
+                .create();
+
+        dialog.setOnShowListener(dialog1 -> {
+
+            Button button = ((AlertDialog) dialog1).getButton(AlertDialog.BUTTON_POSITIVE);
+            button.setOnClickListener(view1 -> {
+                final String password = pass.getText().toString();
+                if (!SUPER_SECRET_PASSWORD.equals(password)) {
+                    Toast.makeText(getApplicationContext(), R.string.error_wrong_password,
+                            Toast.LENGTH_SHORT).show();
+                    pass.requestFocus();
+                    return;
+                }
+
+                final String text = edit.getText().toString().trim();
+                //No question, no submit
+                if (TextUtils.isEmpty(text)) {
+                    Toast.makeText(getApplicationContext(), R.string.error_empty_question,
+                            Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                getPresenter().submitQuestion(text);
+                //Dismiss once everything is OK.
+                dialog1.dismiss();
+            });
+        });
+        dialog.show();
+    }
+
+    @Override
+    public void onQuestionSubmittedSuccessfully() {
+        Toast.makeText(getApplicationContext(), R.string.question_set_success,
+                Toast.LENGTH_SHORT).show();
     }
 
     @OnClick({R.id.a_main_button_super_happy,
