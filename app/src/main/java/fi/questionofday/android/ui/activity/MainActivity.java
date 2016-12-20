@@ -73,6 +73,12 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @Override
     protected void onResume() {
         super.onResume();
+        if (question != null) {
+            animateViews();
+        }
+    }
+
+    private void animateViews() {
         //Delay until ready to animate:
         buttonSuperHappy.post(() -> {
             animateView(buttonSuperHappy);
@@ -104,7 +110,15 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @Override
     public void showQuestion(Question question) {
         this.question = question;
+        textQuestion.setAlpha(0);
         textQuestion.setText(question.getText());
+        textQuestion.animate()
+                .scaleY(1f)
+                .scaleX(1f)
+                .alpha(1f)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .start();
+        animateViews();
     }
 
     @Override

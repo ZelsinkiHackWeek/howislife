@@ -14,8 +14,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:textSize="@dimen/text_large"
-            android:text="@string/how_is_life"/>
+            android:textSize="@dimen/text_large"/>
 
     <LinearLayout
             android:layout_width="wrap_content"
