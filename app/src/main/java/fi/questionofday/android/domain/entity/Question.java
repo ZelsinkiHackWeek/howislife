@@ -42,4 +42,12 @@ public class Question {
         result = 31 * result + (text != null ? text.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id='" + id + '\'' +
+                ", text='" + text + '\'' +
+                '}';
+    }
 }

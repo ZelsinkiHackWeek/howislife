@@ -1,10 +1,14 @@
 package fi.questionofday.android.ui.presenter;
 
+import java.util.List;
+
 import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.helper.SubscriptionHelper;
 
 public class StatisticsActivityPresenter extends
         BasePresenter<StatisticsActivityPresenter.StatisticsActivityView> {
+
     private final QuestionService questionService;
 
     public StatisticsActivityPresenter(SubscriptionHelper subscriptionHelper,
@@ -13,11 +17,19 @@ public class StatisticsActivityPresenter extends
         this.questionService = questionService;
     }
 
-    public void loadStuff() {
-        //Load stuff
+    @Override
+    public void initialize() {
+        subscriptionHelper.addSubscription(
+                questionService.loadQuestionsFeedback()
+                        .subscribe(feedbacks -> getView().showFeedback(feedbacks),
+                                throwable -> {
+                                    getView().showError();
+                                })
+        );
     }
 
     public interface StatisticsActivityView extends BasePresenter.View {
-        void openStatistics();
+        void showError();
+        void showFeedback(List<Feedback> feedbackList);
     }
 }

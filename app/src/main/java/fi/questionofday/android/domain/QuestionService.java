@@ -26,12 +26,6 @@ public class QuestionService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<Question> loadFeedbackForQuestion(int questionId) {
-        return repository.loadFeedbackForQuestion(questionId)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread());
-    }
-
     public Observable<List<Feedback>> loadQuestionsFeedback() {
         return repository.loadQuestionsFeedback()
                 .subscribeOn(Schedulers.io())

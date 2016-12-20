@@ -100,57 +100,93 @@ public class QuestionRepository {
 
     public Completable submitFeedback(Question question, Feedback.FEEDBACK feedback) {
 
-        return Completable.create(c -> {
-            questionsTable.child(question.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        return Completable.create(c ->
 
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    QuestionData questionData = dataSnapshot.getValue(QuestionData.class);
-                    Integer currentStars;
+                questionsTable.child(question.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
 
-                    if (questionData.stars == null) {
-                        questionData.stars = new ArrayList<>(4);
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        QuestionData questionData = dataSnapshot.getValue(QuestionData.class);
+                        Integer currentStars;
+
+                        if (questionData.stars == null) {
+                            questionData.stars = new ArrayList<>(4);
+                        }
+
+                        switch (feedback) {
+                            case ONE:
+                                currentStars = questionData.stars.get(0);
+                                currentStars += 1;
+                                questionData.stars.set(0, currentStars);
+                                break;
+                            case TWO:
+                                currentStars = questionData.stars.get(1);
+                                currentStars += 1;
+                                questionData.stars.set(1, currentStars);
+                                break;
+                            case THREE:
+                                currentStars = questionData.stars.get(2);
+                                currentStars += 1;
+                                questionData.stars.set(2, currentStars);
+                                break;
+                            case FOUR:
+                                currentStars = questionData.stars.get(3);
+                                currentStars += 1;
+                                questionData.stars.set(3, currentStars);
+                                break;
+                        }
+                        questionsTable.child(questionData.id).setValue(questionData);
+                        c.onComplete();
                     }
 
-                    switch (feedback) {
-                        case ONE:
-                            currentStars = questionData.stars.get(0);
-                            currentStars += 1;
-                            questionData.stars.set(0, currentStars);
-                            break;
-                        case TWO:
-                            currentStars = questionData.stars.get(1);
-                            currentStars += 1;
-                            questionData.stars.set(1, currentStars);
-                            break;
-                        case THREE:
-                            currentStars = questionData.stars.get(2);
-                            currentStars += 1;
-                            questionData.stars.set(2, currentStars);
-                            break;
-                        case FOUR:
-                            currentStars = questionData.stars.get(3);
-                            currentStars += 1;
-                            questionData.stars.set(3, currentStars);
-                            break;
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        c.onError(databaseError.toException());
                     }
-                    questionsTable.child(questionData.id).setValue(questionData);
-                    c.onComplete();
-                }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    c.onError(databaseError.toException());
-                }
-            });
-        });
+                }));
     }
 
     public Observable<List<Feedback>> loadQuestionsFeedback() {
-        return Observable.never();
+
+        return Observable.create(new ObservableOnSubscribe<List<Feedback>>() {
+
+            @Override
+            public void subscribe(ObservableEmitter<List<Feedback>> e) throws Exception {
+
+                ValueEventListener valueListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        List<Feedback> feedbackList = new ArrayList<>();
+                        for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            QuestionData questionData = snapshot.getValue(QuestionData.class);
+                            // Add feedback object to the list
+                            feedbackList.add(new Feedback(
+                                    new Question(questionData.id, questionData.text),
+                                    questionData.stars.get(0),
+                                    questionData.stars.get(1),
+                                    questionData.stars.get(2),
+                                    questionData.stars.get(3)
+                            ));
+                        }
+                        e.onNext(feedbackList);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        e.onError(databaseError.toException());
+                    }
+                };
+
+                e.setCancellable(() -> {
+                    // should unsubscribe here
+                    questionsTable.removeEventListener(valueListener);
+                });
+
+                questionsTable.addValueEventListener(valueListener);
+
+            }
+        }).distinctUntilChanged();
     }
 
-    public Observable<Question> loadFeedbackForQuestion(int questionId) {
-        return Observable.never();
-    }
 }
