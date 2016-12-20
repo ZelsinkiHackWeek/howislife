@@ -2,8 +2,12 @@ package fi.questionofday.android.ui.activity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.util.Random;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -18,12 +22,15 @@ import fi.questionofday.android.ui.util.AnimationUtils;
 public class MainActivity extends BaseActivity implements MainActivityPresenter.MainActivityView {
 
     private MainActivityPresenter presenter;
+    final Random random = new Random();
+    final int minDelay = 150;
+    final int minDuration = 100;
 
     @BindView(R.id.a_main_question_of_the_day) TextView textQuestion;
-    @BindView(R.id.a_main_button_super_happy) TextView buttonSuperHappy;
-    @BindView(R.id.a_main_button_happy) TextView buttonHappy;
-    @BindView(R.id.a_main_button_meh) TextView buttonMeh;
-    @BindView(R.id.a_main_button_sad) TextView buttonSad;
+    @BindView(R.id.a_main_button_super_happy) ImageView buttonSuperHappy;
+    @BindView(R.id.a_main_button_happy) ImageView buttonHappy;
+    @BindView(R.id.a_main_button_meh) ImageView buttonMeh;
+    @BindView(R.id.a_main_button_sad) ImageView buttonSad;
 
     private Question question;
 
@@ -51,10 +58,36 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     }
 
     private void initView() {
-        buttonSuperHappy.setText(new String(Character.toChars(0x1F601)));
-        buttonHappy.setText(new String(Character.toChars(0x1F60A)));
-        buttonMeh.setText(new String(Character.toChars(0x1F612)));
-        buttonSad.setText(new String(Character.toChars(0x1F622)));
+        buttonSuperHappy.setTag(R.drawable.emoji_super_happy);
+        buttonHappy.setTag(R.drawable.emoji_happy);
+        buttonMeh.setTag(R.drawable.emoji_meh);
+        buttonSad.setTag(R.drawable.emoji_sad);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //Delay until ready to animate:
+        buttonSuperHappy.post(() -> {
+            animateView(buttonSuperHappy);
+            animateView(buttonHappy);
+            animateView(buttonMeh);
+            animateView(buttonSad);
+        });
+    }
+
+    private void animateView(View view) {
+        //Reset values:
+        view.setScaleX(0);
+        view.setScaleY(0);
+        //Animate:
+        view.animate()
+                .scaleY(1f)
+                .scaleX(1f)
+                .setDuration(random.nextInt(100)+minDuration)
+                .setStartDelay(random.nextInt(100)+minDelay)
+                .setInterpolator(new AccelerateDecelerateInterpolator())
+                .start();
     }
 
     @Override
@@ -84,7 +117,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_happy,
             R.id.a_main_button_meh,
             R.id.a_main_button_sad})
-    public void onEmoticonClick(TextView view) {
+    public void onEmoticonClick(ImageView view) {
         AnimationUtils.clickAnimation(view, () -> {
             getPresenter().submitResult();
             ThanksActivity.launch(this, view);
