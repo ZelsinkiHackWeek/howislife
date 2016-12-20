@@ -2,6 +2,7 @@ package fi.questionofday.android.data;
 
 import java.util.List;
 
+import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.domain.entity.Question;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -21,11 +22,11 @@ public class QuestionRepository {
         return Observable.never();
     }
 
-    public Completable submitFeedback(Object question, Object feedback) {
+    public Completable submitFeedback(Question question, int feedback) {
         return Completable.never();
     }
 
-    public Observable<List<Object>> loadQuestionsFeedback() {
+    public Observable<List<Feedback>> loadQuestionsFeedback() {
         return Observable.never();
     }
 

@@ -31,7 +31,7 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
     }
 
     public void submitResult() {
-        questionService.submitFeedback(null, null);
+        questionService.submitFeedback(null, 0);
     }
 
     public interface MainActivityView extends BasePresenter.View {

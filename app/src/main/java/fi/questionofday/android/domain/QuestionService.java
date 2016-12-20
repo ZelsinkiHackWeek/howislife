@@ -3,6 +3,7 @@ package fi.questionofday.android.domain;
 import java.util.List;
 
 import fi.questionofday.android.data.QuestionRepository;
+import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.domain.entity.Question;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
@@ -29,13 +30,13 @@ public class QuestionService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<List<Object>> loadQuestionsFeedback() {
+    public Observable<List<Feedback>> loadQuestionsFeedback() {
         return repository.loadQuestionsFeedback()
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable submitFeedback(Object question, Object feedback) {
+    public Completable submitFeedback(Question question, int feedback) {
         return repository.submitFeedback(question, feedback)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
