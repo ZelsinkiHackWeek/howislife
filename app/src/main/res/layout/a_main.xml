@@ -2,7 +2,7 @@
 <android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/activity_main"
+        xmlns:tools="http://schemas.android.com/tools" android:id="@+id/activity_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -21,13 +21,15 @@
             android:layout_alignParentBottom="true"
             android:layout_marginBottom="100dp"
             android:src="@drawable/zalando_logo"
-            android:alpha="0"/>
+            android:alpha="0"
+            tools:ignore="ContentDescription,UnusedAttribute"/>
 
     <TextView
             android:id="@+id/a_main_question_of_the_day"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
             android:textSize="@dimen/text_large"/>
 
     <LinearLayout
@@ -45,7 +47,8 @@
                 android:src="@drawable/emoji_super_happy"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:ignore="ContentDescription,UnusedAttribute"/>
 
         <ImageView
                 android:id="@+id/a_main_button_happy"
@@ -57,7 +60,8 @@
                 android:adjustViewBounds="true"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:ignore="ContentDescription,UnusedAttribute"/>
 
         <ImageView
                 android:id="@+id/a_main_button_meh"
@@ -69,7 +73,8 @@
                 android:adjustViewBounds="true"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:ignore="ContentDescription,UnusedAttribute"/>
 
         <ImageView
                 android:id="@+id/a_main_button_sad"
@@ -81,7 +86,8 @@
                 android:adjustViewBounds="true"
                 android:scaleX="0"
                 android:scaleY="0"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                tools:ignore="ContentDescription,UnusedAttribute"/>
     </LinearLayout>
 
     <LinearLayout
@@ -95,13 +101,15 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/statistics"
-                android:layout_margin="@dimen/margin_small"/>
+                android:layout_margin="@dimen/margin_small"
+                tools:ignore="ButtonStyle"/>
 
         <Button
                 android:id="@+id/a_main_button_change_question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/change_question"
-                android:layout_margin="@dimen/margin_small"/>
+                android:layout_margin="@dimen/margin_small"
+                tools:ignore="ButtonStyle"/>
     </LinearLayout>
 </android.support.percent.PercentRelativeLayout>
