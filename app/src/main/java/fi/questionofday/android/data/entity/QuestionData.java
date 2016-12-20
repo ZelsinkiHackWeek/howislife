@@ -22,6 +22,10 @@ public class QuestionData {
         this.text = text;
         this.creationDate = creationDate;
         this.stars = new ArrayList<>(4);
+        this.stars.add(0);
+        this.stars.add(0);
+        this.stars.add(0);
+        this.stars.add(0);
     }
 
 }
