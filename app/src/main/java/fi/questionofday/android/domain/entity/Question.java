@@ -6,10 +6,10 @@ package fi.questionofday.android.domain.entity;
 
 public class Question {
 
-    private final int id;
+    private final String id;
     private final String text;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
@@ -18,7 +18,7 @@ public class Question {
     }
 
     //constructor method
-    public Question(int id, String text) {
+    public Question(String id, String text) {
         this.id = id;
         this.text = text;
 
