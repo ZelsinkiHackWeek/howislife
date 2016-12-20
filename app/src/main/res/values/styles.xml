@@ -18,6 +18,7 @@
 
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button.Colored">
+        <item name="android:background">@drawable/button_orange</item>
     </style>
 
 </resources>

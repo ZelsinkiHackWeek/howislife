@@ -5,4 +5,7 @@
     <color name="colorAccent">#FF4081</color>
     <color name="white">#fff</color>
     <color name="blue">#00d0ff</color>
+
+    <color name="button_zalando">#FF6900</color>
+    <color name="button_zalando_pressed">#c65200</color>
 </resources>

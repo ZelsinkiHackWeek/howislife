@@ -38,42 +38,50 @@
         <ImageView
                 android:id="@+id/a_main_button_super_happy"
                 android:transitionName="selected"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_super_happy"
                 android:scaleX="0"
-                android:scaleY="0"/>
+                android:scaleY="0"
+                android:layout_weight="1"/>
 
         <ImageView
                 android:id="@+id/a_main_button_happy"
                 android:transitionName="selected"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_happy"
+                android:adjustViewBounds="true"
                 android:scaleX="0"
-                android:scaleY="0"/>
+                android:scaleY="0"
+                android:layout_weight="1"/>
 
         <ImageView
                 android:id="@+id/a_main_button_meh"
                 android:transitionName="selected"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_meh"
+                android:adjustViewBounds="true"
                 android:scaleX="0"
-                android:scaleY="0"/>
+                android:scaleY="0"
+                android:layout_weight="1"/>
 
         <ImageView
                 android:id="@+id/a_main_button_sad"
                 android:transitionName="selected"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:padding="@dimen/activity_horizontal_margin"
                 android:src="@drawable/emoji_sad"
+                android:adjustViewBounds="true"
                 android:scaleX="0"
-                android:scaleY="0"/>
+                android:scaleY="0"
+                android:layout_weight="1"/>
     </LinearLayout>
 
     <LinearLayout
