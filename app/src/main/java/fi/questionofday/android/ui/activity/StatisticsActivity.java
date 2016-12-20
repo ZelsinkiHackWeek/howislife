@@ -3,8 +3,10 @@ package fi.questionofday.android.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -55,8 +57,11 @@ public class StatisticsActivity extends BaseActivity implements
     }
 
     private void initView() {
+        recyclerView.addItemDecoration(
+                new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        recyclerView.setLayoutManager(
+                new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -67,11 +72,12 @@ public class StatisticsActivity extends BaseActivity implements
 
     @Override
     public void showFeedback(List<Feedback> feedbackList) {
-        recyclerView.setAdapter(new FeedbackAdapter(feedbackList));
+        recyclerView.setAdapter(new FeedbackAdapter(feedbackList, presenter));
     }
 
     @Override
     public void showFeedback(Feedback feedbackToShow) {
         // TODO render pie chart
+        Log.i("eee", feedbackToShow.toString());
     }
 }

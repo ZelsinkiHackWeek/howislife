@@ -8,15 +8,22 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 import fi.questionofday.android.R;
 import fi.questionofday.android.domain.entity.Feedback;
+import fi.questionofday.android.ui.presenter.StatisticsActivityPresenter;
 
 public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHolder> {
 
-    private List<Feedback> feedbackList;
+    private final List<Feedback> feedbackList;
+    private final StatisticsActivityPresenter presenter;
 
-    public FeedbackAdapter(List<Feedback> feedbackList) {
+    public FeedbackAdapter(List<Feedback> feedbackList,
+                           StatisticsActivityPresenter presenter) {
         this.feedbackList = feedbackList;
+        this.presenter = presenter;
     }
 
     @Override
@@ -37,13 +44,18 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
         return feedbackList.size();
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    class ViewHolder extends RecyclerView.ViewHolder {
 
-        TextView questionTitle;
+        @BindView(R.id.vh_feedback_questiontitle) TextView questionTitle;
 
         ViewHolder(View v) {
             super(v);
-            questionTitle = (TextView) v.findViewById(R.id.vh_feedback_questiontitle);
+            ButterKnife.bind(this, itemView);
+        }
+
+        @OnClick(R.id.vh_feedback_questiontitle)
+        void clickFeedbackItem() {
+            presenter.onFeedbackClicked(feedbackList.get(getLayoutPosition()));
         }
     }
 }
