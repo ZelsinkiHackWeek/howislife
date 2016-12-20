@@ -1,5 +1,7 @@
 package fi.questionofday.android.domain;
 
+import com.fernandocejas.arrow.optional.Optional;
+
 import java.util.List;
 
 import fi.questionofday.android.data.QuestionRepository;
@@ -18,7 +20,7 @@ public class QuestionService {
         this.repository = repository;
     }
 
-    public Observable<Question> loadCurrentQuestion() {
+    public Observable<Optional<Question>> loadCurrentQuestion() {
         return repository.loadCurrentQuestion().
                 subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

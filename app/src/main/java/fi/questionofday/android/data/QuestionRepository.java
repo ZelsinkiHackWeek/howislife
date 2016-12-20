@@ -6,6 +6,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import com.fernandocejas.arrow.optional.Optional;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +17,9 @@ import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.domain.entity.Question;
 import io.reactivex.Completable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.functions.Function;
 
 public class QuestionRepository {
 
@@ -32,41 +37,55 @@ public class QuestionRepository {
                 .child(QUESTIONS_TABLE_NAME);
     }
 
-    public Observable<Question> loadCurrentQuestion() {
+    public Observable<Optional<Question>> loadCurrentQuestion() {
 
-        return Observable.create(e -> {
+        return Observable.create(new ObservableOnSubscribe<Optional<QuestionData>>() {
 
-            ValueEventListener valueListener = new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
+            @Override
+            public void subscribe(ObservableEmitter<Optional<QuestionData>> e) throws Exception {
 
-                    // We only need firs item from all the questions
-                    Iterator<DataSnapshot> dataSnapshotIterator =
-                            dataSnapshot.getChildren().iterator();
-                    if (dataSnapshotIterator.hasNext()) {
-                        QuestionData questionData = dataSnapshotIterator.next()
-                                .getValue(QuestionData.class);
-                        e.onNext(questionData);
+                ValueEventListener valueListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        // We only need firs item from all the questions
+                        Iterator<DataSnapshot> dataSnapshotIterator =
+                                dataSnapshot.getChildren().iterator();
+                        if (dataSnapshotIterator.hasNext()) {
+                            QuestionData questionData = dataSnapshotIterator.next()
+                                    .getValue(QuestionData.class);
+                            e.onNext(Optional.of(questionData));
+                        } else {
+                            e.onNext(Optional.absent());
+                        }
                     }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        e.onError(databaseError.toException());
+                    }
+                };
+
+                e.setCancellable(() -> {
+                    // should unsubscribe here
+                    questionsTable.removeEventListener(valueListener);
+                });
+
+                questionsTable.orderByChild("creationDate")
+                        .limitToLast(1)
+                        .addValueEventListener(valueListener);
+
+            }
+        }).map(new Function<Optional<QuestionData>, Optional<Question>>() {
+            @Override
+            public Optional<Question> apply(Optional<QuestionData> questionDataOpt) throws
+                    Exception {
+                if (questionDataOpt.isPresent()) {
+                    return Optional.of(
+                            new Question(questionDataOpt.get().id, questionDataOpt.get().text));
                 }
-
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-                    e.onError(databaseError.toException());
-                }
-            };
-
-            e.setCancellable(() -> {
-                // should unsubscribe here
-                questionsTable.removeEventListener(valueListener);
-            });
-
-            questionsTable.orderByChild("creationDate")
-                    .limitToLast(1)
-                    .addValueEventListener(valueListener);
-        }).map(object -> {
-            QuestionData questionData = (QuestionData) object;
-            return new Question(questionData.id, questionData.text);
+                return Optional.absent();
+            }
         }).distinctUntilChanged();
     }
 
