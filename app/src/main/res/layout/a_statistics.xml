@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.percent.PercentRelativeLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/activity_main"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -9,17 +9,37 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         android:paddingBottom="@dimen/activity_vertical_margin">
 
-    <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/a_statistics_pie_chart"
-            android:layout_width="400dp"
-            android:layout_height="400dp"/>
-
-    <TextView
-            android:id="@+id/a_main_question_of_the_day"
+    <android.support.v7.widget.RecyclerView
+            android:id="@+id/a_statistics_recyclerview"
+            app:layout_widthPercent="20%"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:textSize="@dimen/text_large"
-            android:text="@string/statistics"/>
+            android:layout_height="match_parent"/>
 
-</RelativeLayout>
+    <View
+            android:layout_width="1dp"
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:layout_marginStart="@dimen/activity_horizontal_margin"
+            android:layout_marginRight="@dimen/activity_horizontal_margin"
+            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+            android:layout_toRightOf="@id/a_statistics_recyclerview"
+            android:layout_toEndOf="@id/a_statistics_recyclerview"/>
+
+    <FrameLayout
+            app:layout_widthPercent="80%"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true" android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true">
+
+        <com.github.mikephil.charting.charts.PieChart
+                app:layout_widthPercent="80%"
+                android:id="@+id/a_statistics_pie_chart"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"/>
+
+    </FrameLayout>
+
+</android.support.percent.PercentRelativeLayout>

@@ -28,8 +28,15 @@ public class StatisticsActivityPresenter extends
         );
     }
 
+    public void onFeedbackClicked(Feedback feedback) {
+        getView().showFeedback(feedback);
+    }
+
     public interface StatisticsActivityView extends BasePresenter.View {
         void showError();
+
         void showFeedback(List<Feedback> feedbackList);
+
+        void showFeedback(Feedback feedbackToShow);
     }
 }

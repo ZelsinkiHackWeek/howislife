@@ -3,7 +3,8 @@ package fi.questionofday.android.ui.activity;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.PieChart;
@@ -16,12 +17,15 @@ import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
 import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.helper.SubscriptionHelper;
+import fi.questionofday.android.ui.adapter.FeedbackAdapter;
 import fi.questionofday.android.ui.presenter.StatisticsActivityPresenter;
 
 public class StatisticsActivity extends BaseActivity implements
         StatisticsActivityPresenter.StatisticsActivityView {
 
     @BindView(R.id.a_statistics_pie_chart) PieChart pieChart;
+    @BindView(R.id.a_statistics_recyclerview) RecyclerView recyclerView;
+
     private StatisticsActivityPresenter presenter;
 
     public static void launch(Activity launchingActivity) {
@@ -51,6 +55,8 @@ public class StatisticsActivity extends BaseActivity implements
     }
 
     private void initView() {
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
     }
 
     @Override
@@ -61,6 +67,11 @@ public class StatisticsActivity extends BaseActivity implements
 
     @Override
     public void showFeedback(List<Feedback> feedbackList) {
-        Log.i(getClass().getSimpleName(), feedbackList.toString());
+        recyclerView.setAdapter(new FeedbackAdapter(feedbackList));
+    }
+
+    @Override
+    public void showFeedback(Feedback feedbackToShow) {
+        // TODO render pie chart
     }
 }
