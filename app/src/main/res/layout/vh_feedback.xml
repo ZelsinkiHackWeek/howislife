@@ -5,4 +5,4 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/margin_small"
-        android:background="@drawable/background_press_effect"/>
+        android:background="?android:attr/selectableItemBackground"/>
