@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.github.mikephil.charting.charts.PieChart;
+
+import butterknife.BindView;
 import fi.questionofday.android.R;
 import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
@@ -13,6 +16,7 @@ import fi.questionofday.android.ui.presenter.StatisticsActivityPresenter;
 public class StatisticsActivity extends BaseActivity implements
         StatisticsActivityPresenter.StatisticsActivityView {
 
+    @BindView(R.id.a_statistics_pie_chart) PieChart pieChart;
     private StatisticsActivityPresenter presenter;
 
     public static void launch(Activity launchingActivity) {
