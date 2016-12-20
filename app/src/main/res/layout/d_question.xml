@@ -20,5 +20,5 @@
             android:layout_height="wrap_content"
             android:inputType="textCapSentences|textMultiLine"
             android:maxLines="3"
-            android:hint="@string/how_is_life"/>
+            android:hint="@string/question"/>
 </LinearLayout>
