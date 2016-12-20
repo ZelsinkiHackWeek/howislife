@@ -9,6 +9,7 @@ import com.google.firebase.database.ValueEventListener;
 import com.fernandocejas.arrow.optional.Optional;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -169,6 +170,7 @@ public class QuestionRepository {
                                     questionData.stars.get(3)
                             ));
                         }
+                        Collections.reverse(feedbackList);
                         e.onNext(feedbackList);
                     }
 
@@ -183,7 +185,7 @@ public class QuestionRepository {
                     questionsTable.removeEventListener(valueListener);
                 });
 
-                questionsTable.addValueEventListener(valueListener);
+                questionsTable.orderByChild("creationDate").addValueEventListener(valueListener);
 
             }
         }).distinctUntilChanged();
