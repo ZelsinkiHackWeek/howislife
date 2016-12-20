@@ -76,7 +76,8 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
 
     @OnClick({R.id.a_main_button_statistics})
     public void onStatisticsClick(View view) {
-        openStatistics();
+//        openStatistics();
+        presenter.createQuestion("Question? " + System.currentTimeMillis());
     }
 
     @OnClick({R.id.a_main_button_super_happy,

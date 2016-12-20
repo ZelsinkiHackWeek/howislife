@@ -41,4 +41,10 @@ public class QuestionService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    public Completable submitQuestion(String text) {
+        return repository.submitQuestion(text)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
 }

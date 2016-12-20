@@ -19,21 +19,20 @@ public class QuestionRepository {
     private static final String QUESTIONS_TABLE_NAME = "questions";
 
     private static QuestionRepository instance = new QuestionRepository();
-    private final DatabaseReference firebaseDatabase;
+    private final DatabaseReference questionsTable;
 
     public static QuestionRepository getInstance() {
         return instance;
     }
 
     private QuestionRepository() {
-        firebaseDatabase = FirebaseDatabase.getInstance().getReference();
+        questionsTable = FirebaseDatabase.getInstance().getReference()
+                .child(QUESTIONS_TABLE_NAME);
     }
 
-    public Observable<Object> loadCurrentQuestion() {
+    public Observable<Question> loadCurrentQuestion() {
 
         return Observable.create(e -> {
-
-            final DatabaseReference questionsTable = firebaseDatabase.child(QUESTIONS_TABLE_NAME);
 
             ValueEventListener valueListener = new ValueEventListener() {
                 @Override
@@ -43,8 +42,9 @@ public class QuestionRepository {
                     Iterator<DataSnapshot> dataSnapshotIterator =
                             dataSnapshot.getChildren().iterator();
                     if (dataSnapshotIterator.hasNext()) {
-                        DataSnapshot dataSnapshotItem = dataSnapshotIterator.next();
-                        e.onNext(dataSnapshotItem.getValue(QuestionData.class));
+                        QuestionData questionData = dataSnapshotIterator.next()
+                                .getValue(QuestionData.class);
+                        e.onNext(questionData);
                     }
                 }
 
@@ -62,6 +62,18 @@ public class QuestionRepository {
             questionsTable.orderByChild("creationDate")
                     .limitToFirst(1)
                     .addValueEventListener(valueListener);
+        }).map(object -> {
+            QuestionData questionData = (QuestionData) object;
+            return new Question(1, "a");
+        });
+    }
+
+    public Completable submitQuestion(String textOfQuestion) {
+
+        return Completable.fromAction(() -> {
+            QuestionData newQuestionData = new QuestionData(String.valueOf(System
+                    .currentTimeMillis()), textOfQuestion);
+            questionsTable.child(newQuestionData.id).setValue(newQuestionData);
         });
     }
 

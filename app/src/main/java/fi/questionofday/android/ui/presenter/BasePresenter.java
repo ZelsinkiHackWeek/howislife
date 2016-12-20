@@ -5,7 +5,7 @@ import fi.questionofday.android.helper.SubscriptionHelper;
 public abstract class BasePresenter<T extends BasePresenter.View> {
 
     private T view;
-    private final SubscriptionHelper subscriptionHelper;
+    protected final SubscriptionHelper subscriptionHelper;
 
     BasePresenter(SubscriptionHelper subscriptionHelper) {
         this.subscriptionHelper = subscriptionHelper;
