@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:windowEnableSplitTouch">false</item>
         <item name="android:splitMotionEvents">false</item>
-        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowContentTransitions" tools:ignore="NewApi">true</item>
         <item name="android:buttonStyle">@style/ButtonStyle</item>
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>

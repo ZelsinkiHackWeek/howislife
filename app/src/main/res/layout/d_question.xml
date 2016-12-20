@@ -1,14 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<LinearLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:padding="@dimen/margin_small">
+
+    <EditText
+            android:id="@+id/d_question_password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:hint="@string/password"/>
 
     <EditText
             android:id="@+id/d_question_edit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textCapSentences"
-            android:hint="@string/how_is_life"/>
-</FrameLayout>
+            android:inputType="textCapSentences|textMultiLine"
+            android:maxLines="3"
+            android:hint="@string/question"/>
+</LinearLayout>

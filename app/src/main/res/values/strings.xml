@@ -1,8 +1,13 @@
 <resources>
     <string name="app_name">Question of the Day</string>
-    <string name="how_is_life">How is Life?</string>
+    <string name="question">Question</string>
+    <string name="password">Password</string>
     <string name="statistics">Statistics</string>
     <string name="thanks_for_feedback">Thanks</string>
     <string name="change_question">Change question</string>
     <string name="enter_the_question">Enter the question</string>
+    <string name="error_empty_question">Question cannot be empty!</string>
+    <string name="error_general">All the errors in the world happened all at once</string>
+    <string name="error_wrong_password">Wrong password!</string>
+    <string name="question_set_success">Question submitted successfully</string>
 </resources>

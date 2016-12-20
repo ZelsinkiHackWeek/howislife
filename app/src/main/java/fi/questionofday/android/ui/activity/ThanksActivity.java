@@ -32,12 +32,20 @@ public class ThanksActivity extends BaseActivity implements
 
     public static void launch(Activity launchingActivity, ImageView logo, @Nullable ImageView v) {
         Intent intent = new Intent(launchingActivity, ThanksActivity.class);
+        //noinspection unchecked
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(launchingActivity,
                         new Pair<>(v, "selected"),
                         new Pair<>(logo, "logo"));
-        intent.putExtra(ARG_EMOTICON, (Integer)v.getTag());
+        if (v != null) {
+            intent.putExtra(ARG_EMOTICON, (Integer)v.getTag());
+        }
         launchingActivity.startActivity(intent, options.toBundle());
+    }
+
+    @Override
+    public void onBackPressed() {
+        //No back allowed
     }
 
     @Override

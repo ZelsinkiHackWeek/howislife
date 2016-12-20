@@ -18,7 +18,8 @@
             android:layout_height="wrap_content"
             android:textSize="@dimen/text_massive"
             android:padding="@dimen/activity_horizontal_margin"
-            android:layout_centerHorizontal="true"/>
+            android:layout_centerHorizontal="true"
+            tools:ignore="ContentDescription,UnusedAttribute"/>
 
     <TextView
             android:id="@+id/a_thanks_thanks"
@@ -38,6 +39,7 @@
             android:layout_centerHorizontal="true"
             android:layout_alignParentBottom="true"
             android:src="@drawable/zalando_logo"
-            android:alpha="1"/>
+            android:alpha="1"
+            tools:ignore="ContentDescription,UnusedAttribute"/>
 
 </RelativeLayout>
