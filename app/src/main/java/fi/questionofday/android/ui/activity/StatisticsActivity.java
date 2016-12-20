@@ -120,7 +120,7 @@ public class StatisticsActivity extends BaseActivity implements
         description.setText("Total votes: " + feedbackToShow.getTotal());
         pieChart.setDescription(description);
         pieChart.setCenterText(feedbackToShow.getQuestion().getText());
-        pieChart.setCenterTextSize(16f);
+        pieChart.setCenterTextSize(20f);
         pieChart.setCenterTextRadiusPercent(90f);
         pieChart.setEntryLabelTextSize(16f);
         final Legend l = pieChart.getLegend();
