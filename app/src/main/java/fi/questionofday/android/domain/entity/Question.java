@@ -1,9 +1,5 @@
 package fi.questionofday.android.domain.entity;
 
-/**
- * Created by plappalainen on 19/12/2016.
- */
-
 public class Question {
 
     private final String id;
@@ -22,5 +18,28 @@ public class Question {
         this.id = id;
         this.text = text;
 
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Question question = (Question) o;
+
+        return id != null ? id.equals(question.id) : question.id == null && (text != null ? text
+                .equals(question.text) : question.text == null);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (text != null ? text.hashCode() : 0);
+        return result;
     }
 }

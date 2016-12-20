@@ -1,9 +1,11 @@
 package fi.questionofday.android.ui.presenter;
 
+import android.util.Log;
+
 import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
-import io.reactivex.functions.Action;
 import io.reactivex.functions.Consumer;
 
 public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.MainActivityView> {
@@ -23,15 +25,26 @@ public class MainActivityPresenter extends BasePresenter<MainActivityPresenter.M
             public void accept(Object o) throws Exception {
                 getView().showQuestion((Question) o);
             }
-        }, throwable -> getView().showError()));
+        }, throwable -> {
+            getView().showError();
+            Log.e(getClass().getSimpleName(), "error loadCurrentQuestion", throwable);
+        }));
     }
 
-    public void submitResult() {
-        questionService.submitFeedback(null, 0);
+    public void submitResult(Question question, Feedback.FEEDBACK feedback) {
+
+        questionService.submitFeedback(question, feedback).subscribe(
+                () -> getView().sayThanks(feedback),
+                throwable -> {
+                    getView().showError();
+                    Log.e(getClass().getSimpleName(), "error", throwable);
+                });
     }
 
     public interface MainActivityView extends BasePresenter.View {
         void openStatistics();
+
+        void sayThanks(Feedback.FEEDBACK givenFeedback);
 
         void showQuestion(Question question);
 

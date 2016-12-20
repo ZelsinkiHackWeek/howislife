@@ -1,10 +1,10 @@
 package fi.questionofday.android.domain.entity;
 
-/**
- * Created by plappalainen on 19/12/2016.
- */
-
 public class Feedback {
+
+    public enum FEEDBACK {
+        ONE, TWO, THREE, FOUR
+    }
 
     private final int star1;
     private final int star2;

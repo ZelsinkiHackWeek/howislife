@@ -36,7 +36,7 @@ public class QuestionService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Completable submitFeedback(Question question, int feedback) {
+    public Completable submitFeedback(Question question, Feedback.FEEDBACK feedback) {
         return repository.submitFeedback(question, feedback)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

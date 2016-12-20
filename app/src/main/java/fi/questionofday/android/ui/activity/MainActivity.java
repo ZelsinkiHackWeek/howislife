@@ -14,6 +14,7 @@ import butterknife.OnClick;
 import fi.questionofday.android.R;
 import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
+import fi.questionofday.android.domain.entity.Feedback;
 import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
 import fi.questionofday.android.ui.presenter.MainActivityPresenter;
@@ -84,8 +85,8 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         view.animate()
                 .scaleY(1f)
                 .scaleX(1f)
-                .setDuration(random.nextInt(100)+minDuration)
-                .setStartDelay(random.nextInt(100)+minDelay)
+                .setDuration(random.nextInt(100) + minDuration)
+                .setStartDelay(random.nextInt(100) + minDelay)
                 .setInterpolator(new AccelerateDecelerateInterpolator())
                 .start();
     }
@@ -93,6 +94,21 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @Override
     public void openStatistics() {
         StatisticsActivity.launch(this);
+    }
+
+    @Override
+    public void sayThanks(Feedback.FEEDBACK feedback) {
+
+        switch (feedback) {
+            case ONE:
+                ThanksActivity.launch(this, buttonSad);
+            case TWO:
+                ThanksActivity.launch(this, buttonMeh);
+            case THREE:
+                ThanksActivity.launch(this, buttonHappy);
+            case FOUR:
+                ThanksActivity.launch(this, buttonSuperHappy);
+        }
     }
 
     @Override
@@ -118,8 +134,21 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_sad})
     public void onEmoticonClick(ImageView view) {
         AnimationUtils.clickAnimation(view, () -> {
-            getPresenter().submitResult();
-            ThanksActivity.launch(this, view);
+
+            switch (view.getId()) {
+                case R.id.a_main_button_super_happy:
+                    getPresenter().submitResult(question, Feedback.FEEDBACK.FOUR);
+                    break;
+                case R.id.a_main_button_happy:
+                    getPresenter().submitResult(question, Feedback.FEEDBACK.THREE);
+                    break;
+                case R.id.a_main_button_meh:
+                    getPresenter().submitResult(question, Feedback.FEEDBACK.TWO);
+                    break;
+                case R.id.a_main_button_sad:
+                    getPresenter().submitResult(question, Feedback.FEEDBACK.ONE);
+                    break;
+            }
         });
     }
 }

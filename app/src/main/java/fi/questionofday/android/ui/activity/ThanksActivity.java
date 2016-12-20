@@ -32,7 +32,7 @@ public class ThanksActivity extends BaseActivity implements
         Intent intent = new Intent(launchingActivity, ThanksActivity.class);
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(launchingActivity, v, "a_thanks_selected");
-        intent.putExtra(ARG_EMOTICON, (Integer)v.getTag());
+        intent.putExtra(ARG_EMOTICON, (Integer) v.getTag());
         launchingActivity.startActivity(intent, options.toBundle());
     }
 
@@ -51,8 +51,7 @@ public class ThanksActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             emoticon = savedInstanceState.getInt(ARG_EMOTICON);
-        }
-        else {
+        } else {
             emoticon = getIntent().getIntExtra(ARG_EMOTICON, 0);
         }
         initView();

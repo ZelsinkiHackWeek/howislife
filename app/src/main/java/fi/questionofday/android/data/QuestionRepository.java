@@ -6,6 +6,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -66,7 +67,7 @@ public class QuestionRepository {
         }).map(object -> {
             QuestionData questionData = (QuestionData) object;
             return new Question(questionData.id, questionData.text);
-        });
+        }).distinctUntilChanged();
     }
 
     public Completable submitQuestion(String textOfQuestion) {
@@ -78,8 +79,52 @@ public class QuestionRepository {
         });
     }
 
-    public Completable submitFeedback(Question question, int feedback) {
-        return Completable.never();
+    public Completable submitFeedback(Question question, Feedback.FEEDBACK feedback) {
+
+        return Completable.create(c -> {
+            questionsTable.child(question.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    QuestionData questionData = dataSnapshot.getValue(QuestionData.class);
+                    Integer currentStars;
+
+                    if (questionData.stars == null) {
+                        questionData.stars = new ArrayList<>(4);
+                    }
+
+                    switch (feedback) {
+                        case ONE:
+                            currentStars = questionData.stars.get(0);
+                            currentStars += 1;
+                            questionData.stars.set(0, currentStars);
+                            break;
+                        case TWO:
+                            currentStars = questionData.stars.get(1);
+                            currentStars += 1;
+                            questionData.stars.set(1, currentStars);
+                            break;
+                        case THREE:
+                            currentStars = questionData.stars.get(2);
+                            currentStars += 1;
+                            questionData.stars.set(2, currentStars);
+                            break;
+                        case FOUR:
+                            currentStars = questionData.stars.get(3);
+                            currentStars += 1;
+                            questionData.stars.set(3, currentStars);
+                            break;
+                    }
+                    questionsTable.child(questionData.id).setValue(questionData);
+                    c.onComplete();
+                }
+
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+                    c.onError(databaseError.toException());
+                }
+            });
+        });
     }
 
     public Observable<List<Feedback>> loadQuestionsFeedback() {
