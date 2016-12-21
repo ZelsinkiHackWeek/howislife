@@ -61,7 +61,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
         @OnClick(R.id.vh_feedback_questiontitle)
         void clickFeedbackItem() {
-            presenter.onFeedbackClicked(feedbackList.get(getLayoutPosition()));
+            presenter.onFeedbackClicked(feedbackList.get(getAdapterPosition()));
         }
     }
 }
