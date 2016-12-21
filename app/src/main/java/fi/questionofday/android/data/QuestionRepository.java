@@ -147,31 +147,23 @@ public class QuestionRepository {
                 }));
     }
 
-    public Observable<List<Feedback>> loadQuestionsFeedback() {
+    public Observable<List<Question>> loadQuestions() {
 
-        return Observable.create(new ObservableOnSubscribe<List<Feedback>>() {
+        return Observable.create(new ObservableOnSubscribe<List<Question>>() {
 
             @Override
-            public void subscribe(ObservableEmitter<List<Feedback>> e) throws Exception {
+            public void subscribe(ObservableEmitter<List<Question>> e) throws Exception {
 
                 ValueEventListener valueListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-                        List<Feedback> feedbackList = new ArrayList<>();
+                        List<Question> questionList = new ArrayList<>();
                         for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                             QuestionData questionData = snapshot.getValue(QuestionData.class);
-                            // Add feedback object to the list
-                            feedbackList.add(new Feedback(
-                                    new Question(questionData.id, questionData.text),
-                                    questionData.stars.get(0),
-                                    questionData.stars.get(1),
-                                    questionData.stars.get(2),
-                                    questionData.stars.get(3)
-                            ));
+                            questionList.add(new Question(questionData.id, questionData.text));
                         }
-                        Collections.reverse(feedbackList);
-                        e.onNext(feedbackList);
+                        Collections.reverse(questionList);
+                        e.onNext(questionList);
                     }
 
                     @Override
@@ -191,4 +183,57 @@ public class QuestionRepository {
         }).distinctUntilChanged();
     }
 
+    public Observable<Optional<Feedback>> loadFeedback(Question question) {
+
+        return Observable.create(new ObservableOnSubscribe<Optional<QuestionData>>() {
+            @Override
+            public void subscribe(ObservableEmitter<Optional<QuestionData>> e) throws Exception {
+
+                ValueEventListener valueListener = new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+
+                        // We only need firs item from all the questions
+                        Iterator<DataSnapshot> dataSnapshotIterator =
+                                dataSnapshot.getChildren().iterator();
+                        if (dataSnapshotIterator.hasNext()) {
+                            QuestionData questionData = dataSnapshotIterator.next()
+                                    .getValue(QuestionData.class);
+                            e.onNext(Optional.of(questionData));
+                        } else {
+                            e.onNext(Optional.absent());
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        e.onError(databaseError.toException());
+                    }
+                };
+
+                e.setCancellable(() -> {
+                    // should unsubscribe here
+                    questionsTable.removeEventListener(valueListener);
+                });
+
+                questionsTable.child(question.getId())
+                        .limitToFirst(1)
+                        .addValueEventListener(valueListener);
+            }
+        }).map(questionDataOptional -> {
+            if (questionDataOptional.isPresent()) {
+                QuestionData questionData = questionDataOptional.get();
+                return Optional.of(new Feedback(
+                        new Question(
+                                questionData.id,
+                                questionData.text
+                        ), questionData.stars.get(0),
+                        questionData.stars.get(1),
+                        questionData.stars.get(2),
+                        questionData.stars.get(3)));
+            } else {
+                return Optional.absent();
+            }
+        });
+    }
 }

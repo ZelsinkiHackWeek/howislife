@@ -12,22 +12,22 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import fi.questionofday.android.R;
-import fi.questionofday.android.domain.entity.Feedback;
+import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.ui.presenter.StatisticsActivityPresenter;
 
-public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHolder> {
+public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHolder> {
 
-    private final List<Feedback> feedbackList;
+    private final List<Question> questionList;
     private final StatisticsActivityPresenter presenter;
 
-    public FeedbackAdapter(List<Feedback> feedbackList,
+    public QuestionAdapter(List<Question> questionList,
                            StatisticsActivityPresenter presenter) {
-        this.feedbackList = feedbackList;
+        this.questionList = questionList;
         this.presenter = presenter;
     }
 
     @Override
-    public FeedbackAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
+    public QuestionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {
         return new ViewHolder(LayoutInflater.from(parent.getContext()).inflate(R.layout
                 .vh_feedback, parent, false));
@@ -35,13 +35,12 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.questionTitle.setText(feedbackList.get(position).getQuestion().getText());
+        holder.questionTitle.setText(questionList.get(position).getText());
     }
 
-    // Return the size of your dataset (invoked by the layout manager)
     @Override
     public int getItemCount() {
-        return feedbackList.size();
+        return questionList.size();
     }
 
     class ViewHolder extends RecyclerView.ViewHolder {
@@ -55,7 +54,7 @@ public class FeedbackAdapter extends RecyclerView.Adapter<FeedbackAdapter.ViewHo
 
         @OnClick(R.id.vh_feedback_questiontitle)
         void clickFeedbackItem() {
-            presenter.onFeedbackClicked(feedbackList.get(getLayoutPosition()));
+            presenter.onQuestionClicked(questionList.get(getLayoutPosition()));
         }
     }
 }

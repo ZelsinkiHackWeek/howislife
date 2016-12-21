@@ -18,8 +18,9 @@ import fi.questionofday.android.R;
 import fi.questionofday.android.data.QuestionRepository;
 import fi.questionofday.android.domain.QuestionService;
 import fi.questionofday.android.domain.entity.Feedback;
+import fi.questionofday.android.domain.entity.Question;
 import fi.questionofday.android.helper.SubscriptionHelper;
-import fi.questionofday.android.ui.adapter.FeedbackAdapter;
+import fi.questionofday.android.ui.adapter.QuestionAdapter;
 import fi.questionofday.android.ui.presenter.StatisticsActivityPresenter;
 
 public class StatisticsActivity extends BaseActivity implements
@@ -71,8 +72,8 @@ public class StatisticsActivity extends BaseActivity implements
     }
 
     @Override
-    public void showFeedback(List<Feedback> feedbackList) {
-        recyclerView.setAdapter(new FeedbackAdapter(feedbackList, presenter));
+    public void showQuestions(List<Question> questionList) {
+        recyclerView.setAdapter(new QuestionAdapter(questionList, presenter));
     }
 
     @Override
