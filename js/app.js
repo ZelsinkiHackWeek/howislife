@@ -1,21 +1,34 @@
 var favMovies = new Firebase('https://question-of-the-day-96172.firebaseio.com/questions');
 
 function refreshUI(questionText, oneStar, twoStars, threeStars, fourStars) {
-    var lis ='';
+
+
+    //Update pie chart:
     google.charts.load('current', {'packages':['corechart']});
     google.charts.setOnLoadCallback(drawChart);
     function drawChart() {
 
     var data = google.visualization.arrayToDataTable([
-        ['Mood', 'Percent'],
-      ['Super happy',     fourStars],
-      ['Happy',      threeStars],
-      ['Meh',  twoStars],
+      ['Mood', 'Percent'],
+      ['Super happy', fourStars],
+      ['Happy', threeStars],
+      ['Meh', twoStars],
       ['Sad', oneStar]
     ]);
 
+    //Update title:
+    document.getElementById("question_title").innerHTML = questionText;
+    document.getElementById("total_votes").innerHTML = "Total votes: " + (oneStar + twoStars + threeStars + fourStars);
+
     var options = {
-      title: questionText
+      title: questionText,
+      pieHole: 0.3,
+      slices: {
+                  0: { color: '#02e227' },
+                  1: { color: '#d7e202' },
+                  2: { color: '#ff9400' },
+                  3: { color: '#ff0000' }
+                }
     };
 
     var chart = new google.visualization.PieChart(document.getElementById('piechart'));
