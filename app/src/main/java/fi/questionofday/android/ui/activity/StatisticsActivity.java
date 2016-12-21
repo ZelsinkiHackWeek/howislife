@@ -15,7 +15,7 @@ import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.formatter.DefaultValueFormatter;
+import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -114,7 +114,7 @@ public class StatisticsActivity extends BaseActivity implements
         pieDataSet.setValueTextSize(20f);
         pieDataSet.setColors(colors);
         final PieData pieData = new PieData(pieDataSet);
-        pieData.setValueFormatter(new DefaultValueFormatter(0));
+        pieData.setValueFormatter(new PercentFormatter());
         pieData.setValueTextSize(16f);
         pieChart.setData(pieData);
         final Description description = new Description();
@@ -124,6 +124,7 @@ public class StatisticsActivity extends BaseActivity implements
         pieChart.setCenterText(feedbackToShow.getQuestion().getText());
         pieChart.setCenterTextSize(20f);
         pieChart.setCenterTextRadiusPercent(90f);
+        pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(16f);
         final Legend l = pieChart.getLegend();
         l.setTextSize(16f);
