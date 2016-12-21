@@ -19,7 +19,14 @@ favMovies.on("value", function(snapshot) {
     var twoStars;
     var threeStars;
     var fourStars;
+
+    var biggestId = Number.MIN_VALUE;
     for (var key in data) {
+        if (key < biggestId) {
+            continue;
+        } else {
+            biggestId = key;
+        }
         if (data.hasOwnProperty(key)) {
             text = data[key].text ? data[key].text : '';
             oneStar = data[key].stars[0]
