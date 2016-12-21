@@ -32,7 +32,7 @@ public class QuestionService {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
-    public Observable<Optional<Feedback>> loadFeedback(Question question) {
+    public Observable<Feedback> loadFeedback(Question question) {
         return repository.loadFeedback(question)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());

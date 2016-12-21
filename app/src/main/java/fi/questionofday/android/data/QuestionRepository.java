@@ -183,26 +183,17 @@ public class QuestionRepository {
         }).distinctUntilChanged();
     }
 
-    public Observable<Optional<Feedback>> loadFeedback(Question question) {
+    public Observable<Feedback> loadFeedback(Question question) {
 
-        return Observable.create(new ObservableOnSubscribe<Optional<QuestionData>>() {
+        return Observable.create(new ObservableOnSubscribe<QuestionData>() {
             @Override
-            public void subscribe(ObservableEmitter<Optional<QuestionData>> e) throws Exception {
+            public void subscribe(ObservableEmitter<QuestionData> e) throws Exception {
 
                 ValueEventListener valueListener = new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        // We only need firs item from all the questions
-                        Iterator<DataSnapshot> dataSnapshotIterator =
-                                dataSnapshot.getChildren().iterator();
-                        if (dataSnapshotIterator.hasNext()) {
-                            QuestionData questionData = dataSnapshotIterator.next()
-                                    .getValue(QuestionData.class);
-                            e.onNext(Optional.of(questionData));
-                        } else {
-                            e.onNext(Optional.absent());
-                        }
+                        e.onNext(dataSnapshot.getValue(QuestionData.class));
                     }
 
                     @Override
@@ -217,13 +208,10 @@ public class QuestionRepository {
                 });
 
                 questionsTable.child(question.getId())
-                        .limitToFirst(1)
                         .addValueEventListener(valueListener);
             }
-        }).map(questionDataOptional -> {
-            if (questionDataOptional.isPresent()) {
-                QuestionData questionData = questionDataOptional.get();
-                return Optional.of(new Feedback(
+        }).map(questionData ->
+                new Feedback(
                         new Question(
                                 questionData.id,
                                 questionData.text
@@ -231,9 +219,5 @@ public class QuestionRepository {
                         questionData.stars.get(1),
                         questionData.stars.get(2),
                         questionData.stars.get(3)));
-            } else {
-                return Optional.absent();
-            }
-        });
     }
 }

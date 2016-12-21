@@ -26,6 +26,12 @@ public class QuestionAdapter extends RecyclerView.Adapter<QuestionAdapter.ViewHo
         this.presenter = presenter;
     }
 
+    public void setItems(List<Question> items) {
+        questionList.clear();
+        questionList.addAll(items);
+        notifyDataSetChanged();
+    }
+
     @Override
     public QuestionAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
                                                          int viewType) {

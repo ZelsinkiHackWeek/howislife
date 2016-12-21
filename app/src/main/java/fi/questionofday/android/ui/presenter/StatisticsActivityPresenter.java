@@ -27,9 +27,7 @@ public class StatisticsActivityPresenter extends
         subscriptionHelper.addSubscription(
                 questionService.loadQuestions()
                         .subscribe(questions -> getView().showQuestions(questions),
-                                throwable -> {
-                                    getView().showError();
-                                })
+                                throwable -> getView().showError())
         );
     }
 
@@ -40,8 +38,8 @@ public class StatisticsActivityPresenter extends
         }
 
         questionFeedBackDisposable = questionService.loadFeedback(question)
-                .subscribe(feedbackOptional -> {
-                    getView().showFeedback(feedbackOptional.orNull());
+                .subscribe(feedback -> {
+                    getView().showFeedback(feedback);
                 });
 
         subscriptionHelper.addSubscription(questionFeedBackDisposable);
@@ -52,6 +50,6 @@ public class StatisticsActivityPresenter extends
 
         void showQuestions(List<Question> questionList);
 
-        void showFeedback(@Nullable Feedback feedbackToShow);
+        void showFeedback(Feedback feedbackToShow);
     }
 }
