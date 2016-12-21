@@ -85,6 +85,9 @@ public class StatisticsActivity extends BaseActivity implements
         if (questionAdapter == null) {
             questionAdapter = new QuestionAdapter(new ArrayList<>(), presenter);
             recyclerView.setAdapter(questionAdapter);
+            if (questionList.size() > 0) {
+                getPresenter().onQuestionClicked(questionList.get(0));
+            }
         }
         questionAdapter.setItems(questionList);
     }

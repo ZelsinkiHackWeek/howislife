@@ -5,6 +5,6 @@
 
     <dimen name="margin_small">16dp</dimen>
 
-    <dimen name="text_large">48sp</dimen>
+    <dimen name="text_large">56sp</dimen>
     <dimen name="text_massive">128sp</dimen>
 </resources>

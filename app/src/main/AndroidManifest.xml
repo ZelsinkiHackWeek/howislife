@@ -11,7 +11,8 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme"
             tools:ignore="AllowBackup,GoogleAppIndexingWarning">
-        <activity android:name=".ui.activity.MainActivity">
+        <activity android:name=".ui.activity.MainActivity"
+            android:screenOrientation="landscape">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
 
@@ -19,8 +20,10 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".ui.activity.ThanksActivity"/>
-        <activity android:name=".ui.activity.StatisticsActivity"/>
+        <activity android:name=".ui.activity.ThanksActivity"
+                  android:screenOrientation="landscape"/>
+        <activity android:name=".ui.activity.StatisticsActivity"
+                  android:screenOrientation="landscape"/>
     </application>
 
 </manifest>
