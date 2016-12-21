@@ -2,11 +2,26 @@ var favMovies = new Firebase('https://question-of-the-day-96172.firebaseio.com/q
 
 function refreshUI(questionText, oneStar, twoStars, threeStars, fourStars) {
     var lis ='';
-//    var lis = '';
-//    for (var i = 0; i < list.length; i++) {
-//        lis += '<li data-key="' + list[i].key + '">' + list[i].name + ' [' + genLinks(list[i].key, list[i].name) + ']</li>';
-//    };
-//    document.getElementById('favMovies').innerHTML = lis;
+    google.charts.load('current', {'packages':['corechart']});
+    google.charts.setOnLoadCallback(drawChart);
+    function drawChart() {
+
+    var data = google.visualization.arrayToDataTable([
+        ['Mood', 'Percent'],
+      ['Super happy',     fourStars],
+      ['Happy',      threeStars],
+      ['Meh',  twoStars],
+      ['Sad', oneStar]
+    ]);
+
+    var options = {
+      title: questionText
+    };
+
+    var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+
+    chart.draw(data, options);
+    }
 };
 
 // this will get fired on inital load as well as when ever there is a change in the data
@@ -28,5 +43,5 @@ favMovies.on("value", function(snapshot) {
             fourStars = data[key].stars[3]
         }
     }
-    refreshUI(text, oneStar, twoStars, threeStars);
+    refreshUI(text, oneStar, twoStars, threeStars, fourStars);
 });
