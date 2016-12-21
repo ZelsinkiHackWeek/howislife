@@ -2,8 +2,8 @@ package fi.questionofday.android.ui.activity;
 
 import android.app.Activity;
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +18,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.formatter.PercentFormatter;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import butterknife.BindView;
@@ -92,6 +93,7 @@ public class StatisticsActivity extends BaseActivity implements
         questionAdapter.setItems(questionList);
     }
 
+    boolean once = false;
     @Override
     public void showFeedback(Feedback feedbackToShow) {
 
@@ -99,19 +101,19 @@ public class StatisticsActivity extends BaseActivity implements
         final List<Integer> colors = new ArrayList<>();
         if (feedbackToShow.getStar4() > 0) {
             entries.add(new PieEntry(feedbackToShow.getStar4(), "Super happy"));
-            colors.add(Color.rgb(0, 181, 60));
+            colors.add(ContextCompat.getColor(this, R.color.super_happy));
         }
         if (feedbackToShow.getStar3() > 0) {
             entries.add(new PieEntry(feedbackToShow.getStar3(), "Happy"));
-            colors.add(Color.rgb(0, 217, 137));
+            colors.add(ContextCompat.getColor(this, R.color.happy));
         }
         if (feedbackToShow.getStar2() > 0) {
             entries.add(new PieEntry(feedbackToShow.getStar2(), "Meh"));
-            colors.add(Color.rgb(0, 217, 212));
+            colors.add(ContextCompat.getColor(this, R.color.meh));
         }
         if (feedbackToShow.getStar1() > 0) {
             entries.add(new PieEntry(feedbackToShow.getStar1(), "Sad"));
-            colors.add(Color.rgb(56, 135, 214));
+            colors.add(ContextCompat.getColor(this, R.color.sad));
         }
         final PieDataSet pieDataSet = new PieDataSet(entries, null);
         pieDataSet.setValueTextSize(20f);
@@ -129,16 +131,10 @@ public class StatisticsActivity extends BaseActivity implements
         pieChart.setCenterTextRadiusPercent(90f);
         pieChart.setUsePercentValues(true);
         pieChart.setEntryLabelTextSize(16f);
+
+        //Init entries:
         final Legend l = pieChart.getLegend();
-        l.setTextSize(16f);
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.RIGHT);
-        l.setOrientation(Legend.LegendOrientation.VERTICAL);
-        l.setDrawInside(false);
-        l.setXEntrySpace(7f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-        l.setXOffset(-60f);
+        l.setEntries(Collections.emptyList());
         pieChart.invalidate();
     }
 }

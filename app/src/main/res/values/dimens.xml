@@ -4,7 +4,10 @@
     <dimen name="activity_vertical_margin">16dp</dimen>
 
     <dimen name="margin_small">16dp</dimen>
+    <dimen name="margin_tiny">8dp</dimen>
 
     <dimen name="text_large">56sp</dimen>
     <dimen name="text_massive">128sp</dimen>
+    <dimen name="emoji_small">25dp</dimen>
+    <dimen name="color_block">10dp</dimen>
 </resources>

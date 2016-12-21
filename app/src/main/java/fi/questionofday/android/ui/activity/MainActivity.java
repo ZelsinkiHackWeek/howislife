@@ -44,6 +44,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
     @BindView(R.id.a_main_zalando_logo) ImageView zalandoLogo;
 
     private Question question;
+    private boolean waitForResponse;
 
     @Override
     public MainActivityPresenter getPresenter() {
@@ -81,6 +82,7 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
         if (question != null) {
             animateViews();
         }
+        waitForResponse = false;
     }
 
     private void animateViews() {
@@ -211,6 +213,10 @@ public class MainActivity extends BaseActivity implements MainActivityPresenter.
             R.id.a_main_button_meh,
             R.id.a_main_button_sad})
     public void onEmoticonClick(ImageView view) {
+        if (waitForResponse) {
+            return;
+        }
+        waitForResponse = true;
         AnimationUtils.clickAnimation(view, () -> {
 
             switch (view.getId()) {

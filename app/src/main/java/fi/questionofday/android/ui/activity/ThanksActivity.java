@@ -77,7 +77,7 @@ public class ThanksActivity extends BaseActivity implements
 
     private void initView() {
         imageSelected.setImageResource(emoticon);
-        runCloseAnimation();
+        imageSelected.post(this::runCloseAnimation);
     }
 
     @Override

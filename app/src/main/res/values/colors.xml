@@ -9,4 +9,10 @@
 
     <color name="button_zalando">#FF6900</color>
     <color name="button_zalando_pressed">#c65200</color>
+
+    <color name="super_happy">#02e227</color>
+    <color name="happy">#d7e202</color>
+    <color name="meh">#ff9400</color>
+    <color name="sad">#ff0000</color>
+
 </resources>
