@@ -13,11 +13,6 @@ public class ThanksActivityPresenter extends BasePresenter<ThanksActivityPresent
         this.questionService = questionService;
     }
 
-    public void loadStuff() {
-        //Load stuff
-    }
-
     public interface ThanksActivityView extends BasePresenter.View {
-        void openStatistics();
     }
 }

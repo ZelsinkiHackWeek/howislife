@@ -31,7 +31,7 @@ public class ThanksActivity extends BaseActivity implements
     private Integer emoticon;
 
     public static void launch(Activity launchingActivity, ImageView logo, @Nullable ImageView v) {
-        Intent intent = new Intent(launchingActivity, ThanksActivity.class);
+        final Intent intent = new Intent(launchingActivity, ThanksActivity.class);
         //noinspection unchecked
         ActivityOptionsCompat options = ActivityOptionsCompat.
                 makeSceneTransitionAnimation(launchingActivity,
@@ -78,10 +78,6 @@ public class ThanksActivity extends BaseActivity implements
     private void initView() {
         imageSelected.setImageResource(emoticon);
         imageSelected.post(this::runCloseAnimation);
-    }
-
-    @Override
-    public void openStatistics() {
     }
 
     private void runCloseAnimation() {

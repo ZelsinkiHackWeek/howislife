@@ -41,7 +41,7 @@ public class StatisticsActivity extends BaseActivity implements
     private QuestionAdapter questionAdapter;
 
     public static void launch(Activity launchingActivity) {
-        Intent intent = new Intent(launchingActivity, StatisticsActivity.class);
+        final Intent intent = new Intent(launchingActivity, StatisticsActivity.class);
         launchingActivity.startActivity(intent);
     }
 
@@ -93,7 +93,6 @@ public class StatisticsActivity extends BaseActivity implements
         questionAdapter.setItems(questionList);
     }
 
-    boolean once = false;
     @Override
     public void showFeedback(Feedback feedbackToShow) {
 
